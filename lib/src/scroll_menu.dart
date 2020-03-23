@@ -27,8 +27,7 @@ class ScrollMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgets =
-        new List.generate(10, (index) => _placeholderIcon());
+    List<Widget> widgets = new List.generate(10, (index) => _placeholderIcon());
 
     return Container(
       height: 80.0,
