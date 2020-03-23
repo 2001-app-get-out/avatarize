@@ -15,25 +15,8 @@ class _MyHomePageState extends State<MyHomePage> {
   File _imageFile;
   dynamic _pickImageError;
   String _retrieveDataError;
-
-  final TextEditingController maxWidthController = TextEditingController();
-  final TextEditingController maxHeightController = TextEditingController();
-  final TextEditingController qualityController = TextEditingController();
-
   void _onImageButtonPressed(ImageSource source, {BuildContext context}) async {
-    await _displayPickImageDialog(context,
-        (double maxWidth, double maxHeight, int quality) async {
-      try {
-        _imageFile = await ImagePicker.pickImage(
-            source: source,
-            maxWidth: maxWidth,
-            maxHeight: maxHeight,
-            imageQuality: quality);
-        setState(() {});
-      } catch (e) {
-        _pickImageError = e;
-      }
-    });
+    await _displayPickImageDialog(context);
   }
 
   Widget _previewImage() {
@@ -141,54 +124,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _displayPickImageDialog(
-      BuildContext context, OnPickImageCallback onPick) async {
+      BuildContext context) async {
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Add optional parameters'),
-            content: Column(
-              children: <Widget>[
-                TextField(
-                  controller: maxWidthController,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  decoration:
-                      InputDecoration(hintText: "Enter maxWidth if desired"),
-                ),
-                TextField(
-                  controller: maxHeightController,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  decoration:
-                      InputDecoration(hintText: "Enter maxHeight if desired"),
-                ),
-                TextField(
-                  controller: qualityController,
-                  keyboardType: TextInputType.number,
-                  decoration:
-                      InputDecoration(hintText: "Enter quality if desired"),
-                ),
-              ],
-            ),
             actions: <Widget>[
-              FlatButton(
-                child: const Text('CANCEL'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
               FlatButton(
                   child: const Text('PICK'),
                   onPressed: () {
-                    double width = maxWidthController.text.isNotEmpty
-                        ? double.parse(maxWidthController.text)
-                        : null;
-                    double height = maxHeightController.text.isNotEmpty
-                        ? double.parse(maxHeightController.text)
-                        : null;
-                    int quality = qualityController.text.isNotEmpty
-                        ? int.parse(qualityController.text)
-                        : null;
-                    onPick(width, height, quality);
                     Navigator.of(context).pop();
                   }),
             ],
@@ -196,6 +140,3 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 }
-
-typedef void OnPickImageCallback(
-    double maxWidth, double maxHeight, int quality);
