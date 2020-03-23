@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CircleImages extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return CircleWidgets();
-  }
-}
-
-class CircleWidgets extends State<CircleImages> {
+class ScrollMenu extends StatelessWidget {
   Widget _placeholderIcon() {
     return Container(
       height: 60.0,
       width: 60.0,
       margin: EdgeInsets.all(6.0),
+      child: Icon(Icons.photo_library),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.0),
         boxShadow: [
@@ -26,12 +20,6 @@ class CircleWidgets extends State<CircleImages> {
           width: 2.0,
           style: BorderStyle.solid,
           color: Color.fromARGB(255, 0, 0, 0),
-        ),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png",
-          ),
         ),
       ),
     );
