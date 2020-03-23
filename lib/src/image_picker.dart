@@ -123,8 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return null;
   }
 
-  Future<void> _displayPickImageDialog(
-      BuildContext context) async {
+  Future<void> _displayPickImageDialog(BuildContext context) async {
     return showDialog(
         context: context,
         builder: (context) {
