@@ -20,6 +20,8 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker: ^0.6.3+4
+  firebase_ml_vision: ^0.9.3+8
+
 
 
   # The following adds the Cupertino Icons font to your application.
