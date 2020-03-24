@@ -10,7 +10,7 @@ To generate MobX boilerplate files, run the command:
 
 If you want to keep this running in the background, you can use
 
-`flutter packages pub run build_runner watch --delete-conflictiong-outputs`
+`flutter packages pub run build_runner watch --delete-conflicting-outputs`
 
 ## Getting Started
 

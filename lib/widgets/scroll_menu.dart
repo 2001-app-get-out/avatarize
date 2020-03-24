@@ -42,13 +42,23 @@ class CircleWidgets extends State<CircleImages> {
     List<Widget> widgets =
         new List.generate(10, (index) => _placeholderIcon());
 
-    return Container(
-      height: 80.0,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.all(2.0),
-        children: widgets,
-      ),
-    );
+   return GestureDetector(
+      // When the child is tapped, show a snackbar.
+      onTap: () {
+        final snackBar = SnackBar(content: Text("Crop"));
+        Scaffold.of(context).showSnackBar(snackBar);
+      },
+      // The custom button
+      child: Container(
+        height: 80.0,
+
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.all(2.0),
+          children: widgets
+        )
+      )
+   );
   }
 }
+
