@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'src/scroll_menu.dart';
+import 'widgets/scroll_menu.dart';
 
 void main() => runApp(new MyApp());
 
