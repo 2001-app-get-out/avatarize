@@ -2,6 +2,16 @@
 
 A new Flutter project.
 
+## Building
+
+To generate MobX boilerplate files, run the command:
+
+`flutter packages pub run build_runner`
+
+If you want to keep this running in the background, you can use
+
+`flutter packages pub run build_runner watch --delete-conflicting-outputs`
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

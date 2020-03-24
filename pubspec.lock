@@ -162,13 +162,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
-  dart_dev:
+  dart_json_mapper:
     dependency: "direct main"
     description:
-      name: dart_dev
+      name: dart_json_mapper
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.0"
+    version: "1.5.8"
+  dart_json_mapper_mobx:
+    dependency: "direct main"
+    description:
+      name: dart_json_mapper_mobx
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.1"
   dart_style:
     dependency: transitive
     description:
@@ -257,7 +264,7 @@ packages:
     source: hosted
     version: "3.1.3"
   image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image
       url: "https://pub.dartlang.org"
@@ -270,6 +277,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3+4"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.16.1"
   io:
     dependency: transitive
     description:
@@ -410,6 +424,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  reflectable:
+    dependency: transitive
+    description:
+      name: reflectable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.3"
   shelf:
     dependency: transitive
     description:
