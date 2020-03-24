@@ -17,8 +17,12 @@ class _PictureScannerState extends State<PictureScanner> {
   File _imageFile;
   Size _imageSize;
   dynamic _scanResults;
-  Detector _currentDetector = Detector.text;
-  final FaceDetector _faceDetector = FirebaseVision.instance.faceDetector();
+  Detector _currentDetector = Detector.face;
+
+  final FaceDetector _faceDetector = FirebaseVision.instance.faceDetector(
+    FaceDetectorOptions(enableContours: true, mode: FaceDetectorMode.accurate),
+  );
+  // final FaceContourType _faceContourType = _faceDetector.getContour();
 
   Future<void> _getAndScanImage() async {
     setState(() {
@@ -70,6 +74,7 @@ class _PictureScannerState extends State<PictureScanner> {
     switch (_currentDetector) {
       case Detector.face:
         results = await _faceDetector.processImage(visionImage);
+
         break;
       default:
         return;
