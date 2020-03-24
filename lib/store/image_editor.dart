@@ -19,6 +19,11 @@ abstract class _ImageEditor with Store {
   @observable
   Image baseImage;
 
+  @action
+  setImage(Image image) {
+    baseImage = image;
+  }
+
   @computed
   Image get finalImage {
     Image src = baseImage.clone();
