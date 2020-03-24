@@ -1,111 +1,286 @@
 import 'package:flutter/material.dart';
+import 'src/scroll_menu.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return new MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
+      theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+        appBar: AppBar(
+          title: Text("circle"),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        body: Center(child: CircleImages()));
   }
 }
+
+// class MyHomePage extends StatelessWidget {
+
+//   @override
+//     Widget build(BuildContext context) {
+//       // TODO: implement build
+//       return Scaffold(
+//         appBar: AppBar(
+//           title: Text("circle"),
+//         ),
+//         body: Center(
+//           child: Container(
+
+//                   height: 80.0,
+//                   width: 80.0,
+//                   margin: EdgeInsets.only(
+//                     left: 5.0,
+//                     right: 5.0
+//                   ),
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(100.0),
+//                     border: Border.all(
+//                       width: 2.0,
+//                       style:BorderStyle.solid ,
+//                       color: Color.fromARGB(255, 0 , 0, 0)
+//                     ),
+//                     image: DecorationImage(
+//                       fit: BoxFit.cover,
+//                       image: NetworkImage("https://cdn.dribbble.com/users/1368/screenshots/1785863/icons_2x.png")
+//                     )
+//                   )
+//                 )
+//         ) ,
+//       );
+//     }
+// }
+
+//  class BodyLayout extends StatelessWidget {
+//     @override
+//     Widget build(BuildContext context) {
+//       return _myListView(context);
+//     }
+//   }
+
+// Widget _myListView(BuildContext context) {
+//   return ListView.builder(
+//     scrollDirection: Axis.horizontal,
+//     itemBuilder: (context, index) {
+//       return Container(
+//         margin: const EdgeInsets.symmetric(horizontal: 1.0),
+//         color: Colors.tealAccent,
+//         child: Text('$index'),
+//       );
+//     },
+//   );
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   MyHomePage({Key key, this.title}) : super(key: key);
+
+//   final String title;
+
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+//   File _imageFile;
+//   dynamic _pickImageError;
+//   String _retrieveDataError;
+
+//   final TextEditingController maxWidthController = TextEditingController();
+//   final TextEditingController maxHeightController = TextEditingController();
+//   final TextEditingController qualityController = TextEditingController();
+
+//   void _onImageButtonPressed(ImageSource source, {BuildContext context}) async {
+//     await _displayPickImageDialog(context,
+//         (double maxWidth, double maxHeight, int quality) async {
+//       try {
+//         _imageFile = await ImagePicker.pickImage(
+//             source: source,
+//             maxWidth: maxWidth,
+//             maxHeight: maxHeight,
+//             imageQuality: quality);
+//         setState(() {});
+//       } catch (e) {
+//         _pickImageError = e;
+//       }
+//     });
+//   }
+
+//   Widget _previewImage() {
+//     final Text retrieveError = _getRetrieveErrorWidget();
+//     if (retrieveError != null) {
+//       return retrieveError;
+//     }
+//     if (_imageFile != null) {
+//       return Image.file(_imageFile);
+//     } else if (_pickImageError != null) {
+//       return Text(
+//         'Pick image error: $_pickImageError',
+//         textAlign: TextAlign.center,
+//       );
+//     } else {
+//       return const Text(
+//         'You have not yet picked an image.',
+//         textAlign: TextAlign.center,
+//       );
+//     }
+//   }
+
+//   Future<void> retrieveLostData() async {
+//     final LostDataResponse response = await ImagePicker.retrieveLostData();
+//     if (response.isEmpty) {
+//       return;
+//     }
+//     if (response.file != null) {
+//       setState(() {
+//         _imageFile = response.file;
+//       });
+//     } else {
+//       _retrieveDataError = response.exception.code;
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(widget.title),
+//       ),
+//       body: Center(
+//         child: Platform.isAndroid
+//             ? FutureBuilder<void>(
+//                 future: retrieveLostData(),
+//                 builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+//                   switch (snapshot.connectionState) {
+//                     case ConnectionState.none:
+//                     case ConnectionState.waiting:
+//                       return const Text(
+//                         'You have not yet picked an image.',
+//                         textAlign: TextAlign.center,
+//                       );
+//                     case ConnectionState.done:
+//                       return _previewImage();
+//                     default:
+//                       if (snapshot.hasError) {
+//                         return Text(
+//                           'Pick image/video error: ${snapshot.error}}',
+//                           textAlign: TextAlign.center,
+//                         );
+//                       } else {
+//                         return const Text(
+//                           'You have not yet picked an image.',
+//                           textAlign: TextAlign.center,
+//                         );
+//                       }
+//                   }
+//                 },
+//               )
+//             : (_previewImage()),
+//       ),
+//       floatingActionButton: Column(
+//         mainAxisAlignment: MainAxisAlignment.end,
+//         children: <Widget>[
+//           FloatingActionButton(
+//             onPressed: () {
+//               _onImageButtonPressed(ImageSource.gallery, context: context);
+//             },
+//             heroTag: 'image0',
+//             tooltip: 'Pick Image from gallery',
+//             child: const Icon(Icons.photo_library),
+//           ),
+//           Padding(
+//             padding: const EdgeInsets.only(top: 16.0),
+//             child: FloatingActionButton(
+//               onPressed: () {
+//                 _onImageButtonPressed(ImageSource.camera, context: context);
+//               },
+//               heroTag: 'image1',
+//               tooltip: 'Take a Photo',
+//               child: const Icon(Icons.camera_alt),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Text _getRetrieveErrorWidget() {
+//     if (_retrieveDataError != null) {
+//       final Text result = Text(_retrieveDataError);
+//       _retrieveDataError = null;
+//       return result;
+//     }
+//     return null;
+//   }
+
+//   Future<void> _displayPickImageDialog(
+//       BuildContext context, OnPickImageCallback onPick) async {
+//     return showDialog(
+//         context: context,
+//         builder: (context) {
+//           return AlertDialog(
+//             title: Text('Add optional parameters'),
+//             content: Column(
+//               children: <Widget>[
+//                 TextField(
+//                   controller: maxWidthController,
+//                   keyboardType: TextInputType.numberWithOptions(decimal: true),
+//                   decoration:
+//                       InputDecoration(hintText: "Enter maxWidth if desired"),
+//                 ),
+//                 TextField(
+//                   controller: maxHeightController,
+//                   keyboardType: TextInputType.numberWithOptions(decimal: true),
+//                   decoration:
+//                       InputDecoration(hintText: "Enter maxHeight if desired"),
+//                 ),
+//                 TextField(
+//                   controller: qualityController,
+//                   keyboardType: TextInputType.number,
+//                   decoration:
+//                       InputDecoration(hintText: "Enter quality if desired"),
+//                 ),
+//               ],
+//             ),
+//             actions: <Widget>[
+//               FlatButton(
+//                 child: const Text('CANCEL'),
+//                 onPressed: () {
+//                   Navigator.of(context).pop();
+//                 },
+//               ),
+//               FlatButton(
+//                   child: const Text('PICK'),
+//                   onPressed: () {
+//                     double width = maxWidthController.text.isNotEmpty
+//                         ? double.parse(maxWidthController.text)
+//                         : null;
+//                     double height = maxHeightController.text.isNotEmpty
+//                         ? double.parse(maxHeightController.text)
+//                         : null;
+//                     int quality = qualityController.text.isNotEmpty
+//                         ? int.parse(qualityController.text)
+//                         : null;
+//                     onPick(width, height, quality);
+//                     Navigator.of(context).pop();
+//                   }),
+//             ],
+//           );
+//         });
+//   }
+// }
+
+// typedef void OnPickImageCallback(
+//     double maxWidth, double maxHeight, int quality);
