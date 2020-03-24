@@ -47,15 +47,11 @@ class _ImagePickerState extends State<ImagePickerClass> {
     }
     if (_imageFile != null) {
       return  Scaffold(
-        // appBar: AppBar(
-        // title: const Text('SelectedImage'),
-        // ),
         body: Center(
         child: Image.file(_imageFile)
         ),
         floatingActionButton: CircleImages(),
       );
-      // return Image.file(_imageFile);
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
