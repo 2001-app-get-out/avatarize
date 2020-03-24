@@ -26,5 +26,7 @@ abstract class _ImageEditor with Store {
     if (filter != null) {
       src = filter.apply(src, amount: filterAmount);
     }
+
+    return src;
   }
 }

@@ -39,10 +39,9 @@ class CircleWidgets extends State<CircleImages> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgets =
-        new List.generate(10, (index) => _placeholderIcon());
+    List<Widget> widgets = new List.generate(10, (index) => _placeholderIcon());
 
-   return GestureDetector(
+    return GestureDetector(
       // When the child is tapped, show a snackbar.
       onTap: () {
         final snackBar = SnackBar(content: Text("Crop"));
@@ -51,14 +50,12 @@ class CircleWidgets extends State<CircleImages> {
       // The custom button
       child: Container(
         height: 80.0,
-
         child: ListView(
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.all(2.0),
-          children: widgets
-        )
-      )
-   );
+          children: widgets,
+        ),
+      ),
+    );
   }
 }
-
