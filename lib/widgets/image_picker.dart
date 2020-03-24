@@ -47,9 +47,9 @@ class _ImagePickerState extends State<ImagePickerClass> {
     }
     if (_imageFile != null) {
       return  Scaffold(
-        appBar: AppBar(
-        title: const Text('SelectedImage'),
-        ),
+        // appBar: AppBar(
+        // title: const Text('SelectedImage'),
+        // ),
         body: Center(
         child: Image.file(_imageFile)
         ),
