@@ -8,6 +8,30 @@ class CircleImages extends StatefulWidget{
   }
 }
 
+class MyButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // The GestureDetector wraps the button.
+    return GestureDetector(
+      // When the child is tapped, show a snackbar.
+      onTap: () {
+        final snackBar = SnackBar(content: Text("Tap"));
+
+        Scaffold.of(context).showSnackBar(snackBar);
+      },
+      // The custom button
+      child: Container(
+        padding: EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Theme.of(context).buttonColor,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Text('My Button'),
+      ),
+    );
+  }
+}
+
 class CircleWidgets extends State<CircleImages>{
   @override
     Widget build(BuildContext context) {
@@ -257,7 +281,14 @@ class CircleWidgets extends State<CircleImages>{
                 )
             );
       // }
-      return Container(
+      return GestureDetector(
+      // When the child is tapped, show a snackbar.
+      onTap: () {
+        final snackBar = SnackBar(content: Text("Crop"));
+        Scaffold.of(context).showSnackBar(snackBar);
+      },
+      // The custom button
+      child: Container(
         height: 80.0,
 
         child: ListView(
@@ -265,8 +296,8 @@ class CircleWidgets extends State<CircleImages>{
           padding: EdgeInsets.all(2.0),
           children: widgets
         )
+      )
       );
-
     }
 }
 
