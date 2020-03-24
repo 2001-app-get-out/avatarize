@@ -1,5 +1,19 @@
 import 'package:flutter/material.dart';
 
+class MyHomePage extends StatelessWidget {
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Homepage'),
+    ),
+    body: Center(
+      child: CircleImages()
+    ),
+  );
+}
+}
+
 class CircleImages extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

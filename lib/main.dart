@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => TestMenu(),
         '/image_picker': (context) => ImagePickerClass(),
-        '/scroll_menu': (context) => CircleImages(),
+        '/scroll_menu': (context) => MyHomePage(),
       },
       theme: new ThemeData(
         primarySwatch: Colors.blue,
