@@ -1,20 +1,12 @@
-import 'package:mobx/mobx.dart';
 import 'package:image/image.dart';
 
-part 'filter.g.dart';
-
-abstract class Filter<T> = _Filter<T> with _$Filter<T>;
-
-abstract class _Filter<T> with Store {
-  @observable
-  T settings;
-
-  Image apply(Image src);
+abstract class Filter {
+  Image apply(Image src, {num amount = 1.0});
 }
 
-class Sepia extends Filter<num> {
-  Image apply(Image src) {
-    return sepia(src, amount: settings);
+class Sepia extends Filter {
+  Image apply(Image src, {num amount = 1.0}) {
+    return sepia(src, amount: amount);
   }
 }
 
