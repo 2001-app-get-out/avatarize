@@ -18,6 +18,7 @@ class FaceDetectorPainter extends CustomPainter {
     final Paint painter = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round
       ..color = Colors.red;
 
     final PointMode pointMode = PointMode.points;

@@ -8,6 +8,10 @@
 .buildlog/
 .history
 .svn/
+/android/google-services.json
+/android/app/google-services.json
+ios/GoogleService-Info
+ios/Runner/GoogleService-Info
 
 # IntelliJ related
 *.iml
