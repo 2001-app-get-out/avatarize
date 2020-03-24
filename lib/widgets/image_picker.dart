@@ -76,7 +76,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("image picker"),
       ),
       body: Center(
         child: Platform.isAndroid
