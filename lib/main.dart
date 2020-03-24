@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+import 'store/edited_image.dart';
 import 'widgets/scroll_menu.dart';
 import 'widgets/image_picker.dart';
+import 'widgets/image_editor.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  GetIt.I.registerSingleton<EditedImage>(EditedImage());
+
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -15,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => TestMenu(),
         '/image_picker': (context) => ImagePickerClass(),
         '/scroll_menu': (context) => MyHomePage(),
+        '/image_editor': (context) => ImageEditorPage(),
       },
       theme: new ThemeData(
         primarySwatch: Colors.blue,
@@ -39,6 +48,11 @@ class TestMenu extends StatelessWidget {
             context,
             text: "image picker",
             route: "/image_picker",
+          ),
+          _navButton(
+            context,
+            text: "image editor",
+            route: "/image_editor",
           ),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:test_flutter/store/edited_image.dart';
 
 class ImagePickerClass extends StatefulWidget {
   ImagePickerClass({Key key, this.title}) : super(key: key);
@@ -32,6 +34,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
         setState(() {
           _imageFile = pickedFile;
         });
+        GetIt.I<EditedImage>().loadFile(pickedFile);
       } catch (e) {
         _pickImageError = e;
       }
