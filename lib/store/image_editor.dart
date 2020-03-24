@@ -5,20 +5,16 @@ import 'filter.dart';
 import 'decoration.dart';
 import 'adjustment.dart';
 
-part 'editor_store.g.dart';
+part 'image_editor.g.dart';
 
-class EditorStore = _EditorStore with _$EditorStore;
+class ImageEditor = _ImageEditor with _$ImageEditor;
 
-abstract class _EditorStore with Store {
+abstract class _ImageEditor with Store {
   @observable
   Filter filter;
 
   @observable
   num filterAmount;
-
-  final ObservableList<Adjustment> adjustments = ObservableList.of([]);
-
-  final ObservableList<Decoration> decorations = ObservableList.of([]);
 
   @observable
   Image baseImage;
