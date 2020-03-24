@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'widgets/scroll_menu.dart';
 import 'widgets/image_picker.dart';
+import 'widgets/scanner.dart';
 
-void main() => runApp(MaterialApp(
-      routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => MyApp(),
-        '/$PictureScanner': (BuildContext context) => PictureScanner(),
-      },
-    ));
+void main() => runApp(new MyApp());
 
-/* THIS IS THE ROOT OF THE APP */
 class MyApp extends StatelessWidget {
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -21,6 +16,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => TestMenu(),
         '/image_picker': (context) => ImagePickerClass(),
         '/scroll_menu': (context) => CircleImages(),
+        '/face_recognition': (context) => PictureScanner(),
       },
       theme: new ThemeData(
         primarySwatch: Colors.blue,
@@ -45,6 +41,11 @@ class TestMenu extends StatelessWidget {
             context,
             text: "image picker",
             route: "/image_picker",
+          ),
+          _navButton(
+            context,
+            text: "face recognition",
+            route: "/face_recognition",
           ),
         ],
       ),

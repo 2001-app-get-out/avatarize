@@ -162,6 +162,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+  dart_dev:
+    dependency: "direct main"
+    description:
+      name: dart_dev
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.4.0"
   dart_json_mapper:
     dependency: "direct main"
     description:
