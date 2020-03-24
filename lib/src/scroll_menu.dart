@@ -42,6 +42,7 @@ class CircleWidgets extends State<ScrollMenu> {
   Widget build(BuildContext context) {
     List<Widget> widgets = new List.generate(10, (index) => _placeholderIcon());
 
+<<<<<<< HEAD
     return GestureDetector(
         // When the child is tapped, show a snackbar.
         onTap: () {
@@ -55,5 +56,25 @@ class CircleWidgets extends State<ScrollMenu> {
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.all(2.0),
                 children: widgets)));
+=======
+   return GestureDetector(
+      // When the child is tapped, show a snackbar.
+      onTap: () {
+        final snackBar = SnackBar(content: Text("Crop"));
+        Scaffold.of(context).showSnackBar(snackBar);
+      },
+      // The custom button
+      child: Container(
+        height: 80.0,
+
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.all(2.0),
+          children: widgets
+        )
+      )
+   );
+>>>>>>> e6554cce9bffc263b2d9073a53b6a77bbc12ce11
   }
 }
+
