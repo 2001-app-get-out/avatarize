@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:test_flutter/store/edited_image.dart';
 
 class ImagePickerClass extends StatefulWidget {
-  ImagePickerClass({Key key, this.title}) : super(key: key);
+  ImagePickerClass({Key key, this.title = "image picker"}) : super(key: key);
 
   final String title;
 
@@ -79,7 +79,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("image picker"),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Platform.isAndroid

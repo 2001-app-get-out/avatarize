@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:developer' as developer;
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'package:mobx/mobx.dart';
@@ -17,46 +18,18 @@ abstract class _EditedImage with Store {
   final SquareCrop crop = SquareCrop();
 
   @observable
-  Filter filter = Sepia();
-
-  @observable
-  num filterAmount = 1.0;
+  Filter filter = Grayscale();
 
   @observable
   Image baseImage;
 
-  @observable
-  ObservableFuture<ui.Image> uiImageFuture;
-
-  ui.Image uiImage;
-
-  @action
-  loadFile(File file) async {
-    baseImage = decodeImage(await file.readAsBytes());
-    int size = math.min(baseImage.width, baseImage.height);
-    crop.moveAndScale(xOffset: 0, yOffset: 0, size: size.toDouble());
-    uiImageFuture = ObservableFuture(_renderImage());
-    uiImage = await uiImageFuture;
-  }
-
   @computed
-  bool get isRendered {
-    return uiImageFuture != null &&
-        uiImageFuture.status == FutureStatus.fulfilled;
-  }
-
-  @computed
-  Image get finalImage {
-    Image src = baseImage.clone();
-
-    if (filter != null) {
-      src = filter.apply(src, amount: filterAmount);
+  ObservableFuture<ui.Image> get uiImageFuture {
+    if (finalImage == null) {
+      return ObservableFuture.value(null);
     }
 
-    return src;
-  }
-
-  Future<ui.Image> _renderImage() {
+    developer.log("recomputing ui image...");
     var completer = Completer<ui.Image>();
 
     ui.decodeImageFromPixels(
@@ -67,7 +40,46 @@ abstract class _EditedImage with Store {
       completer.complete,
     );
 
-    return completer.future;
+    return completer.future.asObservable();
+  }
+
+  @computed
+  bool get isRendered {
+    return uiImageFuture != null && uiImageFuture.value != null;
+  }
+
+  @computed
+  ui.Image get uiImage {
+    return uiImageFuture.value;
+  }
+
+  @computed
+  Image get finalImage {
+    if (baseImage == null) {
+      return null;
+    }
+
+    Image src = baseImage.clone();
+    if (filter != null) {
+      src = filter.apply(src);
+    }
+    return src;
+  }
+
+  @action
+  loadFile(File file) async {
+    baseImage = decodeImage(await file.readAsBytes());
+    int size = math.min(baseImage.width, baseImage.height);
+    crop.setBounds(
+      xMax: baseImage.width.toDouble(),
+      yMax: baseImage.height.toDouble(),
+      sizeMax: size.toDouble(),
+    );
+    crop.moveAndScale(
+      xOffset: 0,
+      yOffset: 0,
+      size: size.toDouble(),
+    );
   }
 }
 
@@ -83,15 +95,37 @@ abstract class _SquareCrop with Store {
   @observable
   double size;
 
+  @observable
+  double sizeMax;
+
+  @observable
+  double sizeMin = 32;
+
+  @observable
+  double xMax;
+
+  @observable
+  double yMax;
+
   @computed
   ui.Rect get rect {
     return ui.Rect.fromLTWH(xOffset, yOffset, size, size);
   }
 
   @action
-  void moveAndScale({double xOffset, double yOffset, double size}) {
-    this.xOffset = xOffset;
-    this.yOffset = yOffset;
+  void setBounds(
+      {double xMax, double yMax, double sizeMax, double sizeMin = 32}) {
+    this.xMax = xMax;
+    this.yMax = yMax;
+    this.sizeMax = sizeMax;
+    this.sizeMin = sizeMin;
+  }
+
+  @action
+  void moveAndScale({double xOffset = 0.0, double yOffset = 0.0, double size}) {
+    size = math.max(sizeMin, math.min(size, sizeMax));
     this.size = size;
+    this.xOffset = math.max(0, math.min(xOffset, xMax - size));
+    this.yOffset = math.max(0, math.min(yOffset, yMax - size));
   }
 }
