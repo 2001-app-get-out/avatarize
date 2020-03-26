@@ -24,7 +24,7 @@ class ImageEditorPage extends StatelessWidget {
             child: Container(
               alignment: AlignmentDirectional.center,
               child: CircleImages(),
-            );
+            ),
           ),
         ],
       ),

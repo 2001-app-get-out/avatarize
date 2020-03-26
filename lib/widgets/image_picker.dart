@@ -65,10 +65,6 @@ class _ImagePickerState extends State<ImagePickerClass> {
   }
 
 
-
-
-
-
   Future<void> retrieveLostData() async {
     final LostDataResponse response = await ImagePicker.retrieveLostData();
     if (response.isEmpty) {

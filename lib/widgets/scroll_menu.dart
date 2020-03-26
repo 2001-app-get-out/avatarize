@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/store/filter.dart';
 import 'image_editor.dart';
-import 'edited_image.dart';
+import '../store/edited_image.dart';
+import 'package:get_it/get_it.dart';
 
 class MyHomePage extends StatelessWidget {
 @override
@@ -17,6 +19,7 @@ Widget build(BuildContext context) {
 }
 
 class CircleImages extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return CircleWidgets();
@@ -25,13 +28,8 @@ class CircleImages extends StatefulWidget {
 
 
 class CircleWidgets extends State<CircleImages> {
-  Widget _placeholderIcon() {
+  Widget _cropIcon() {
     return GestureDetector(
-      // When the child is tapped, show a snackbar.
-      // onTap: () {
-      //   final snackBar = SnackBar(content: Text("Crop"));
-      //   Scaffold.of(context).showSnackBar(snackBar);
-      // },
       child: 
       Material(
       color: Colors.white,
@@ -50,8 +48,7 @@ class CircleWidgets extends State<CircleImages> {
             color: Colors.white,
             onPressed: () {
               EditedImage image = GetIt.I<EditedImage>();
-              //  final snackBar = SnackBar(content: Text("Crop"));
-              // Scaffold.of(context).showSnackBar(snackBar);
+              image.filter = Grayscale();
             },
           ),
         ),
@@ -60,14 +57,73 @@ class CircleWidgets extends State<CircleImages> {
     );
   }
 
+Widget _grayScaleIcon() {
+    return GestureDetector(
+      child: 
+      Material(
+      color: Colors.grey,
+      child: Center(
+        child: Ink(
+          decoration: const ShapeDecoration(
+            color: Colors.white,
+            shape: CircleBorder(),
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.collections,
+              color: Colors.grey,
+              size: 30.0,
+            ),
+            color: Colors.white,
+            onPressed: () {
+              EditedImage image = GetIt.I<EditedImage>();
+              image.filter = Grayscale();
+            },
+          ),
+        ),
+      ),
+    ),
+    );
+  }
+
+  Widget _sepiaIcon() {
+    return GestureDetector(
+      child: 
+      Material(
+      color: Colors.brown,
+      child: Center(
+        child: Ink(
+          decoration: const ShapeDecoration(
+            color: Colors.white,
+            shape: CircleBorder(),
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.collections,
+              color: Colors.brown,
+              size: 30.0,
+            ),
+            color: Colors.white,
+            onPressed: () {
+              EditedImage image = GetIt.I<EditedImage>();
+              image.filter = Sepia();
+            },
+          ),
+        ),
+      ),
+    ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgets = new List.generate(20, (index) => _placeholderIcon());
+   List<Widget> widgets = [SizedBox(width: 100), _sepiaIcon(), SizedBox(width: 100), _grayScaleIcon()];
     return Container(
       height: 80.0,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.all(2.0),
+        padding: EdgeInsets.all(10.0),
         children: widgets,
       ),
     );
@@ -75,27 +131,51 @@ class CircleWidgets extends State<CircleImages> {
 }
 
 
-class SubMenu extends State<CircleImages> {
-  Widget _placeholderIcon() {
+class FilterSubMenu extends State<CircleImages> {
+  Widget _grayScale() {
     return GestureDetector(
-      // When the child is tapped, show a snackbar.
-      // onTap: () {
-      //   final snackBar = SnackBar(content: Text("Submenu"));
-      //   Scaffold.of(context).showSnackBar(snackBar);
-      // },
       child: 
       Material(
       color: Colors.white,
       child: Center(
         child: Ink(
           decoration: const ShapeDecoration(
-            color: Colors.green,
+            color: Colors.black,
             shape: CircleBorder(),
           ),
           child: IconButton(
             icon: Icon(
-              Icons.crop,
-              color: Colors.yellow,
+              Icons.collections,
+              color: Colors.grey,
+              size: 30.0,
+            ),
+            color: Colors.white,
+            onPressed: () {
+              final snackBar = SnackBar(content: Text("Crop"));
+              Scaffold.of(context).showSnackBar(snackBar);
+            },
+          ),
+        ),
+      ),
+    ),
+    );
+  }
+
+  Widget _sepia() {
+    return GestureDetector(
+      child: 
+      Material(
+      color: Colors.pink,
+      child: Center(
+        child: Ink(
+          decoration: const ShapeDecoration(
+            color: Colors.purple,
+            shape: CircleBorder(),
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.color_lens,
+              color: Colors.red,
               size: 30.0,
             ),
             color: Colors.white,
@@ -112,7 +192,7 @@ class SubMenu extends State<CircleImages> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgets = new List.generate(3, (index) => _placeholderIcon());
+      List<Widget> widgets = [_grayScale(), _sepia()];
     return Container(
       height: 80.0,
       child: ListView(
