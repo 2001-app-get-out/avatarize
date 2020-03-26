@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../store/filter.dart';
-import '../store/edited_image.dart';
-import 'save.dart';
-
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,27 +21,63 @@ class CircleImages extends StatefulWidget {
 }
 
 class CircleWidgets extends State<CircleImages> {
-  Widget _placeholderIcon(String title, IconData icon, dynamic pressAction) {
+
+  // CircleWidgets({Key key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       color: Colors.white,
+//       child: Center(
+//         child: Ink(
+//           decoration: const ShapeDecoration(
+//             color: Colors.lightBlue,
+//             shape: CircleBorder(),
+//           ),
+//           child: IconButton(
+//             icon: Icon(Icons.android),
+//             color: Colors.white,
+//             onPressed: () {},
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+  Widget _placeholderIcon() {
+
     return GestureDetector(
-      child: Material(
-        color: Colors.white,
-        child: Center(
-          child: Ink(
-            decoration: const ShapeDecoration(
-              color: Colors.lightBlue,
-              shape: CircleBorder(),
+      // When the child is tapped, show a snackbar.
+      onTap: () {
+
+        final snackBar = SnackBar(content: Text("Grayscale"));
+        Scaffold.of(context).showSnackBar(snackBar);
+      },
+      child:
+      Material(
+      color: Colors.white,
+      child: Center(
+        child: Ink(
+          decoration: const ShapeDecoration(
+            color: Colors.lightBlue,
+            shape: CircleBorder(
+              side: BorderSide(color: Colors.red)
             ),
-            child: IconButton(
-              icon: Icon(
-                icon,
-                color: Colors.purple,
-                size: 30.0,
-              ),
-              color: Colors.white,
-              onPressed: () {
-                pressAction();
-              },
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.crop,
+              color: Colors.purple,
+              size: 30.0,
             ),
+            color: Colors.white,
+            onPressed: () {
+              // final snackBar = SnackBar(content: Text("Crop"));
+              // Scaffold.of(context).showSnackBar(snackBar);
+              EditedImage image = GetIt.I<EditedImage>();
+              image.filter = Grayscale();
+            },
           ),
         ),
       ),
@@ -54,32 +86,6 @@ class CircleWidgets extends State<CircleImages> {
 
   @override
   Widget build(BuildContext context) {
-    // final image = GetIt.I<EditedImage>();
-
-    List<dynamic> iconList = [
-      [
-        "save",
-        Icons.save,
-        () {
-          Save().savePng();
-          
-        }
-      ],
-      // [
-      //   "greyscale",
-      //   Icons.monochrome_photos,
-      //   image.filter = Grayscale(),
-      // ],
-      // [
-      //   "Pixelate",
-      //   Icons.grid_on,
-      //   image.filter = Pixelate(),
-      // ],
-    ];
-    List<Widget> widgets = [];
-    for (List icon in iconList) {
-      widgets.add(_placeholderIcon(icon[0], icon[1], icon[2]));
-    }
     return Container(
       height: 80.0,
       child: ListView(

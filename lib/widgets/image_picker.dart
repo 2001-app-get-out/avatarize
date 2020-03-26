@@ -47,7 +47,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
       return retrieveError;
     }
     if (_imageFile != null) {
-      Navigator.pushNamed(context, '/image_editor');
+      return Image.file(_imageFile);
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
