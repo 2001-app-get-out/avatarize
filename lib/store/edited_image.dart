@@ -15,13 +15,20 @@ part 'edited_image.g.dart';
 class EditedImage = _EditedImage with _$EditedImage;
 
 abstract class _EditedImage with Store {
-  final SquareCrop crop = SquareCrop();
+  @observable
+  Image baseImage;
+
+  @observable
+  ui.Size size;
+
+  @computed
+  double get smallerSide => math.min(size.width, size.height);
+
+  @observable
+  ui.Rect crop;
 
   @observable
   Filter filter = Grayscale();
-
-  @observable
-  Image baseImage;
 
   @computed
   ObservableFuture<ui.Image> get uiImageFuture {
@@ -69,63 +76,20 @@ abstract class _EditedImage with Store {
   @action
   loadFile(File file) async {
     baseImage = decodeImage(await file.readAsBytes());
-    int size = math.min(baseImage.width, baseImage.height);
-    crop.setBounds(
-      xMax: baseImage.width.toDouble(),
-      yMax: baseImage.height.toDouble(),
-      sizeMax: size.toDouble(),
-    );
-    crop.moveAndScale(
-      xOffset: 0,
-      yOffset: 0,
-      size: size.toDouble(),
-    );
-  }
-}
-
-class SquareCrop = _SquareCrop with _$SquareCrop;
-
-abstract class _SquareCrop with Store {
-  @observable
-  double xOffset = 0;
-
-  @observable
-  double yOffset = 0;
-
-  @observable
-  double size;
-
-  @observable
-  double sizeMax;
-
-  @observable
-  double sizeMin = 32;
-
-  @observable
-  double xMax;
-
-  @observable
-  double yMax;
-
-  @computed
-  ui.Rect get rect {
-    return ui.Rect.fromLTWH(xOffset, yOffset, size, size);
+    final smallerSide = math.min(baseImage.width, baseImage.height).toDouble();
+    size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());
+    crop = ui.Rect.fromLTWH(0, 0, smallerSide, smallerSide);
   }
 
   @action
-  void setBounds(
-      {double xMax, double yMax, double sizeMax, double sizeMin = 32}) {
-    this.xMax = xMax;
-    this.yMax = yMax;
-    this.sizeMax = sizeMax;
-    this.sizeMin = sizeMin;
-  }
-
-  @action
-  void moveAndScale({double xOffset = 0.0, double yOffset = 0.0, double size}) {
-    size = math.max(sizeMin, math.min(size, sizeMax));
-    this.size = size;
-    this.xOffset = math.max(0, math.min(xOffset, xMax - size));
-    this.yOffset = math.max(0, math.min(yOffset, yMax - size));
+  cropTo(ui.Rect rect) {
+    final overflow = 0.0;
+    final minSize = 32.0;
+    this.crop = ui.Rect.fromLTRB(
+      math.max(-overflow, math.min(rect.left, size.width - minSize + overflow)),
+      math.max(-overflow, math.min(rect.top, size.height - minSize + overflow)),
+      math.max(-overflow, math.min(rect.right, size.height + overflow)),
+      math.max(-overflow, math.min(rect.bottom, size.height + overflow)),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:ui' as ui;
+import 'dart:math' as math;
 import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -41,7 +42,7 @@ class ImageEditor extends StatelessWidget {
             child: CustomPaint(
               painter: ImagePainter(
                 image: image.uiImage,
-                rect: image.crop.rect,
+                rect: image.crop,
               ),
             ),
           );
@@ -86,7 +87,7 @@ class ImageScaler extends StatefulWidget {
 }
 
 class _ImageScalerState extends State<ImageScaler> {
-  double _startingSize;
+  Size _startingSize;
 
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -104,7 +105,13 @@ class _ImageScalerState extends State<ImageScaler> {
 
   void _onScaleUpdate(ScaleUpdateDetails event) {
     // developer.log(event.toString());
-    widget.image.crop.moveAndScale(size: _startingSize * event.scale);
+
+    widget.image.cropTo(Rect.fromLTWH(
+      0,
+      0,
+      math.min(widget.image.smallerSide, _startingSize.width * event.scale),
+      math.min(widget.image.smallerSide, _startingSize.height * event.scale),
+    ));
   }
 
   void _onScaleEnd(ScaleEndDetails event) {
