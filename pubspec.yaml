@@ -26,9 +26,10 @@ dependencies:
   dart_dev: ^3.0.0
   image: ^2.1.4
 
-  # Use mobx for state management.
+  # Use mobx (and hangers on) for state management.
   mobx: ^1.1.0
   flutter_mobx: ^1.0.1
+  get_it: ^4.0.1
   dart_json_mapper: ^1.5.2
   dart_json_mapper_mobx: ^1.2.0
 
