@@ -28,7 +28,7 @@ abstract class _EditedImage with Store {
   ui.Rect crop;
 
   @observable
-  Filter filter = Grayscale();
+  Filter filter = Sepia();
 
   @computed
   ObservableFuture<ui.Image> get uiImageFuture {
@@ -84,12 +84,16 @@ abstract class _EditedImage with Store {
   @action
   cropTo(ui.Rect rect) {
     final overflow = 0.0;
-    final minSize = 32.0;
+    final minSize = smallerSide / 16;
+    final left = math.max(
+        -overflow, math.min(rect.left, size.width - minSize + overflow));
+    final top = math.max(
+        -overflow, math.min(rect.top, size.height - minSize + overflow));
     this.crop = ui.Rect.fromLTRB(
-      math.max(-overflow, math.min(rect.left, size.width - minSize + overflow)),
-      math.max(-overflow, math.min(rect.top, size.height - minSize + overflow)),
-      math.max(-overflow, math.min(rect.right, size.height + overflow)),
-      math.max(-overflow, math.min(rect.bottom, size.height + overflow)),
+      left,
+      top,
+      math.max(left + minSize, math.min(rect.right, size.height + overflow)),
+      math.max(top + minSize, math.min(rect.bottom, size.height + overflow)),
     );
   }
 }
