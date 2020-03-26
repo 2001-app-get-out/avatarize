@@ -50,12 +50,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
       return retrieveError;
     }
     if (_imageFile != null) {
-      return  Scaffold(
-        body: Center(
-        child: Image.file(_imageFile)
-        ),
-        floatingActionButton: CircleImages(),
-      );
+      return Image.file(_imageFile);
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',

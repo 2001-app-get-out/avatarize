@@ -4,6 +4,7 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'scroll_menu.dart';
 
 import 'package:test_flutter/store/edited_image.dart';
 
@@ -22,9 +23,9 @@ class ImageEditorPage extends StatelessWidget {
           Expanded(
             child: Container(
               alignment: AlignmentDirectional.center,
-              child: Text("ui goes here"),
-            ),
-          )
+              child: CircleImages(),
+            );
+          ),
         ],
       ),
     );
@@ -33,7 +34,7 @@ class ImageEditorPage extends StatelessWidget {
 
 class ImageEditor extends StatelessWidget {
   Widget build(BuildContext context) {
-    final image = GetIt.I<EditedImage>();
+    final image = GetIt.I<EditedImage>(); // Gets image from store
     return Observer(
       builder: (context) {
         if (image.isRendered) {
@@ -74,6 +75,7 @@ class ImagePainter extends CustomPainter {
       (image != old.image || rect != old.rect);
 }
 
+
 class ImageScaler extends StatefulWidget {
   final EditedImage image;
   final Widget child;
@@ -86,6 +88,7 @@ class ImageScaler extends StatefulWidget {
   }
 }
 
+// Contains image gesture detector to set size changes to state
 class _ImageScalerState extends State<ImageScaler> {
   Size _startingSize;
 

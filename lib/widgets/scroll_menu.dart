@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class MyHomePage extends StatelessWidget {
 @override
@@ -49,10 +50,12 @@ class CircleWidgets extends State<CircleImages> {
 // }
 
   Widget _placeholderIcon() {
+    
     return GestureDetector(
       // When the child is tapped, show a snackbar.
       onTap: () {
-        final snackBar = SnackBar(content: Text("Crop"));
+        
+        final snackBar = SnackBar(content: Text("Grayscale"));
         Scaffold.of(context).showSnackBar(snackBar);
       },
       child: 
@@ -62,7 +65,9 @@ class CircleWidgets extends State<CircleImages> {
         child: Ink(
           decoration: const ShapeDecoration(
             color: Colors.lightBlue,
-            shape: CircleBorder(),
+            shape: CircleBorder(
+              side: BorderSide(color: Colors.red)
+            ),
           ),
           child: IconButton(
             icon: Icon(
@@ -72,8 +77,10 @@ class CircleWidgets extends State<CircleImages> {
             ),
             color: Colors.white,
             onPressed: () {
-               final snackBar = SnackBar(content: Text("Crop"));
-              Scaffold.of(context).showSnackBar(snackBar);
+              // final snackBar = SnackBar(content: Text("Crop"));
+              // Scaffold.of(context).showSnackBar(snackBar);
+              EditedImage image = GetIt.I<EditedImage>();
+              image.filter = Grayscale();
             },
           ),
         ),
