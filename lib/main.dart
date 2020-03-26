@@ -5,6 +5,7 @@ import 'store/edited_image.dart';
 import 'widgets/scroll_menu.dart';
 import 'widgets/image_picker.dart';
 import 'widgets/image_editor.dart';
+import 'widgets/save.dart';
 
 void main() {
   GetIt.I.registerSingleton<EditedImage>(EditedImage());

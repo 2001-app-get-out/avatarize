@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:test_flutter/store/edited_image.dart';
+import 'scroll_menu.dart';
 
 class ImageEditorPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class ImageEditorPage extends StatelessWidget {
           Expanded(
             child: Container(
               alignment: AlignmentDirectional.center,
-              child: Text("ui goes here"),
+              child: CircleImages(),
             ),
           )
         ],
