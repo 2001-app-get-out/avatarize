@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'scroll_menu.dart';
 import 'package:test_flutter/store/edited_image.dart';
-
 
 class ImagePickerClass extends StatefulWidget {
   ImagePickerClass({Key key, this.title = "image picker"}) : super(key: key);
@@ -14,7 +12,6 @@ class ImagePickerClass extends StatefulWidget {
   @override
   _ImagePickerState createState() => _ImagePickerState();
 }
-
 
 class _ImagePickerState extends State<ImagePickerClass> {
   File _imageFile;
@@ -44,7 +41,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
     });
   }
 
-  Widget _previewImage() {
+  dynamic _previewImage() {
     final Text retrieveError = _getRetrieveErrorWidget();
     if (retrieveError != null) {
       return retrieveError;
@@ -63,7 +60,6 @@ class _ImagePickerState extends State<ImagePickerClass> {
       );
     }
   }
-
 
   Future<void> retrieveLostData() async {
     final LostDataResponse response = await ImagePicker.retrieveLostData();
@@ -201,14 +197,13 @@ class _ImagePickerState extends State<ImagePickerClass> {
                         ? int.parse(qualityController.text)
                         : null;
                     onPick(width, height, quality);
-                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, '/image_editor');
                   }),
             ],
           );
         });
   }
 }
-
 
 typedef void OnPickImageCallback(
     double maxWidth, double maxHeight, int quality);

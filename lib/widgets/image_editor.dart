@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'scroll_menu.dart';
 
 import 'package:test_flutter/store/edited_image.dart';
+import 'scroll_menu.dart';
 
 class ImageEditorPage extends StatelessWidget {
   Widget build(BuildContext context) {
