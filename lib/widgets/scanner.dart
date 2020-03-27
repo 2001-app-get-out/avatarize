@@ -25,7 +25,7 @@ class _PictureScannerState extends State<PictureScanner> {
       enableLandmarks: true,
       mode: FaceDetectorMode.fast),
   );
-  
+
 
   Future<void> _getAndScanImage() async {
     setState(() {
@@ -78,6 +78,7 @@ class _PictureScannerState extends State<PictureScanner> {
     setState(() {
       _scanResults = results;
     });
+    
   }
 
   CustomPaint _buildResults(Size imageSize, dynamic results) {

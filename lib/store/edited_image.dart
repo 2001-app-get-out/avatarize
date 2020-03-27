@@ -53,12 +53,12 @@ abstract class _EditedImage with Store {
   @computed
   bool get isRendered {
     return uiImageFuture != null && uiImageFuture.value != null;
-  }
+  } // This is what tells it if the Future is completed or not
 
   @computed
   ui.Image get uiImage {
     return uiImageFuture.value;
-  }
+  } // Returns completed image from future
 
   @computed
   Image get finalImage {
@@ -71,7 +71,7 @@ abstract class _EditedImage with Store {
       src = filter.apply(src);
     }
     return src;
-  }
+  } // Applies the filter tothe image
 
   @action
   loadFile(File file) async {
