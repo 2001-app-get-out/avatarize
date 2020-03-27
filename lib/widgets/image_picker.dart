@@ -197,7 +197,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
                         ? int.parse(qualityController.text)
                         : null;
                     onPick(width, height, quality);
-                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, '/image_editor');
                   }),
             ],
           );
