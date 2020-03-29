@@ -11,7 +11,7 @@ class FaceDetectorPainter extends CustomPainter {
   final List<Face> faces;
 
   @override
-  void paint (Canvas canvas, Size size) {
+  void paint(Canvas canvas, Size size) {
     final double scaleX = size.width / absoluteImageSize.width;
     final double scaleY = size.height / absoluteImageSize.height;
 
@@ -35,6 +35,15 @@ class FaceDetectorPainter extends CustomPainter {
         painter,
       );
       List<Offset> pointList = face.getContour(contour).positionsList;
+
+      for (Offset off in pointList) {
+        print('OLD: ' + off.toString());
+        final newX = off.dx / scaleX;
+        final newY = off.dx / scaleY;
+
+        off = new Offset(newX, newY);
+        print('NEW: ' + off.toString());
+      }
       canvas.drawPoints(pointMode, pointList, painter);
     }
   }
