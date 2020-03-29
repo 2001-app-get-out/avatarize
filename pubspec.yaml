@@ -29,6 +29,8 @@ dependencies:
   get_it: ^4.0.1
   dart_json_mapper: ^1.5.2
   dart_json_mapper_mobx: ^1.2.0
+  file: ^5.1.0
+  path_provider: ^1.6.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
