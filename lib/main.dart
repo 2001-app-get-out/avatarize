@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:test_flutter/store/face.dart';
+
 
 import 'store/edited_image.dart';
 import 'widgets/scroll_menu.dart';
 import 'widgets/image_picker.dart';
 import 'widgets/scanner.dart';
 import 'widgets/image_editor.dart';
-import 'widgets/save.dart';
 
 void main() {
   GetIt.I.registerSingleton<EditedImage>(EditedImage());
-
+  GetIt.I.registerSingleton<ScannedFace>(ScannedFace());
   runApp(new MyApp());
 }
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/image_picker': (context) => ImagePickerClass(),
         '/face_recognition': (context) => PictureScanner(),
         '/image_editor': (context) => ImageEditorPage(),
+        
       },
       theme: new ThemeData(
         primarySwatch: Colors.blue,

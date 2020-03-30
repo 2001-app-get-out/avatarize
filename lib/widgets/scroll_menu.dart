@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/store/filter.dart';
-import 'image_editor.dart';
 import '../store/edited_image.dart';
 import 'package:get_it/get_it.dart';
 import 'save.dart';
@@ -138,7 +137,9 @@ class CircleWidgets extends State<CircleImages> {
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
-      SizedBox(width:50),
+      SizedBox(width: 50),
+      _cropIcon(),
+      SizedBox(width: 50),
       _sepiaIcon(),
       SizedBox(width: 50),
       _grayScaleIcon(),

@@ -24,14 +24,14 @@ abstract class _EditedImage with Store {
   @observable
   ui.Size size;
 
-  @computed
-  double get smallerSide => math.min(size.width, size.height);
-
   @observable
   ui.Rect crop;
 
   @observable
-  Filter filter = Sepia();
+  Filter filter;
+
+  @computed
+  double get smallerSide => math.min(size.width, size.height);
 
   @computed
   ObservableFuture<ui.Image> get uiImageFuture {
@@ -78,7 +78,11 @@ abstract class _EditedImage with Store {
 
   @action
   loadFile(File file) async {
+<<<<<<< Updated upstream
     ogImage = file;
+=======
+
+>>>>>>> Stashed changes
     baseImage = decodeImage(await file.readAsBytes());
     final smallerSide = math.min(baseImage.width, baseImage.height).toDouble();
     size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());

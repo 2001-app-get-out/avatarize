@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test_flutter/store/edited_image.dart';
+import 'package:test_flutter/store/face.dart';
 
 class ImagePickerClass extends StatefulWidget {
   ImagePickerClass({Key key, this.title = "image picker"}) : super(key: key);
@@ -34,6 +35,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
         setState(() {
           _imageFile = pickedFile;
         });
+        GetIt.I<ScannedFace>().loadFile(pickedFile);
         GetIt.I<EditedImage>().loadFile(pickedFile);
       } catch (e) {
         _pickImageError = e;
@@ -197,7 +199,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
                         ? int.parse(qualityController.text)
                         : null;
                     onPick(width, height, quality);
-                    Navigator.pushNamed(context, '/image_editor');
+                    Navigator.of(context).pop();
                   }),
             ],
           );

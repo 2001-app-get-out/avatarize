@@ -1,13 +1,18 @@
-import 'dart:async';
-import 'dart:io';
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get_it/get_it.dart';
+import 'package:test_flutter/store/face.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image/image.dart' as img;
+import 'scroll_menu.dart';
 
 import 'detector_painters.dart';
+import 'image_editor.dart';
+import '../store/edited_image.dart';
 
+<<<<<<< Updated upstream
 // Main Scanner class
 class PictureScanner extends StatefulWidget {
   @override
@@ -84,67 +89,110 @@ class _PictureScannerState extends State<PictureScanner> {
 
     return CustomPaint(
       painter: painter,
+=======
+final EditedImage imageStore = GetIt.I<EditedImage>();
+final ScannedFace scannedFace = GetIt.I<ScannedFace>();
+
+class PictureScanner extends StatelessWidget {
+  final FaceDetector _faceDetector = FirebaseVision.instance.faceDetector(
+    FaceDetectorOptions(
+      enableContours: true,
+      mode: FaceDetectorMode.fast,
+    ),
+  );
+
+  Widget _buildImage(BuildContext context) {
+    return Observer(
+      builder: (context) {
+        return Container(
+          child: CustomPaint(
+            painter: FaceDetectorSquare(),
+          ),
+        );
+      },
+>>>>>>> Stashed changes
     );
   }
 
-  Widget _buildImage() {
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: Image.file(_imageFile).image,
-          fit: BoxFit.fill,
-        ),
-      ),
-      child: _imageSize == null || _scanResults == null
-          ? const Center(
-              child: Text(
-                'Scanning...',
-                style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 30.0,
-                ),
-              ),
-            )
-          : _buildResults(_imageSize, _scanResults),
-    );
+  onPressedFunc() {
+    print('smash');
+    final newNew = scannedFace.ogImageFile;
+    scannedFace.loadFile(newNew);
   }
 
   @override
   Widget build(BuildContext context) {
+    final ui.Image finalImage = imageStore.uiImage;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Picture Scanner'),
-        actions: <Widget>[
-          PopupMenuButton<Detector>(
-            onSelected: (Detector result) {
-              _currentDetector = result;
-              if (_imageFile != null) _scanImage(_imageFile);
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<Detector>>[
-              const PopupMenuItem<Detector>(
-                child: Text('Detect Face'),
-                value: Detector.face,
-              ),
-            ],
+      ),
+      body: Column(
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: _buildImage(context),
+          ),
+          Expanded(
+            child: Container(
+              alignment: AlignmentDirectional.center,
+              child: CircleImages(),
+            ),
           ),
         ],
       ),
-      body: _imageFile == null
-          ? const Center(child: Text('No image selected.'))
-          : _buildImage(),
       floatingActionButton: FloatingActionButton(
-        onPressed: _getAndScanImage,
-        tooltip: 'Pick Image',
-        child: const Icon(Icons.add_a_photo),
+        onPressed: onPressedFunc(),
+        tooltip: 'Re-Scan',
+        child: const Icon(Icons.refresh),
       ),
     );
   }
 
-  @override
   void dispose() {
     _faceDetector.close();
+<<<<<<< Updated upstream
 
     super.dispose();
+=======
+  }
+}
+
+class FaceDetectorSquare extends CustomPainter {
+  Size absoluteImageSize;
+  List<Face> faces;
+
+  FaceDetectorSquare({this.absoluteImageSize, this.faces});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (absoluteImageSize = null) absoluteImageSize = imageStore.size;
+    if (faces = null) faces = scannedFace.scannedFaces;
+
+    final double scaleX = size.width / absoluteImageSize.width;
+    final double scaleY = size.height / absoluteImageSize.height;
+
+    for (Face face in faces) {
+      canvas.drawRect(
+        Rect.fromLTRB(
+          face.boundingBox.left * scaleX,
+          face.boundingBox.top * scaleY,
+          face.boundingBox.right * scaleX,
+          face.boundingBox.bottom * scaleY,
+        ),
+        Paint(),
+      );
+
+      FaceContourType contour = FaceContourType.face;
+      ui.PointMode pointMode = ui.PointMode.points;
+      List<Offset> pointList = face.getContour(contour).positionsList;
+      canvas.drawPoints(pointMode, pointList, Paint());
+    }
+  }
+
+  @override
+  bool shouldRepaint(FaceDetectorSquare old) {
+    return old.absoluteImageSize != absoluteImageSize || old.faces != faces;
+>>>>>>> Stashed changes
   }
 }
