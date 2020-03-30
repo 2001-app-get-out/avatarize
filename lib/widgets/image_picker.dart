@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'scroll_menu.dart';
 import 'package:test_flutter/store/edited_image.dart';
 
 class ImagePickerClass extends StatefulWidget {

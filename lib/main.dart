@@ -83,7 +83,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("circle"),
       ),
-      body: Center(child: CircleImages()),
+      body: Center(child: MenuWidget()),
     );
   }
 }

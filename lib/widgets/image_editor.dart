@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'dart:math' as math;
+// import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -31,7 +32,7 @@ class ImageEditorPage extends StatelessWidget {
           Expanded(
             child: Container(
               alignment: AlignmentDirectional.center,
-              child: CircleImages(),
+              child: MenuWidget(),
             ),
           ),
         ],
