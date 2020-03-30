@@ -7,13 +7,21 @@ import 'package:get_it/get_it.dart';
 import 'scroll_menu.dart';
 
 import 'package:test_flutter/store/edited_image.dart';
-import 'scroll_menu.dart';
 
 class ImageEditorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("edit image"),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -75,7 +83,6 @@ class ImagePainter extends CustomPainter {
   bool shouldRepaint(ImagePainter old) =>
       (image != old.image || rect != old.rect);
 }
-
 
 class ImageScaler extends StatefulWidget {
   final EditedImage image;

@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/store/filter.dart';
-import 'image_editor.dart';
 import '../store/edited_image.dart';
 import 'package:get_it/get_it.dart';
 import 'save.dart';
 
 class MyHomePage extends StatelessWidget {
-  
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Homepage'),
-    ),
-    body: Center(
-      child: MenuWidget()
-    ),
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Homepage'),
+      ),
+      body: Center(child: MenuWidget()),
+    );
+  }
 }
 
 class MenuWidget extends StatefulWidget {
-   MenuWidget({Key key}) : super(key: key);
+  MenuWidget({Key key}) : super(key: key);
 
   @override
   _MenuWidgetState createState() => _MenuWidgetState();
-  }
+}
 
 class _MenuWidgetState extends State<MenuWidget> {
-
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -87,23 +82,25 @@ class FilterSubMenuWidget extends StatefulWidget {
 
   @override
   _FilterSubMenuWidgetState createState() => _FilterSubMenuWidgetState();
-  }
+}
 
 class _FilterSubMenuWidgetState extends State<FilterSubMenuWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.collections,
-                 color: Colors.grey),
-            title: Text('Grayscale')
-          ),
+              icon: Icon(
+                Icons.collections,
+                color: Colors.grey,
+              ),
+              title: Text('Grayscale')),
           BottomNavigationBarItem(
-            icon: Icon(Icons.collections,
-             color: Colors.brown),
+            icon: Icon(
+              Icons.collections,
+              color: Colors.brown,
+            ),
             title: Text('Sepia'),
           ),
         ],
