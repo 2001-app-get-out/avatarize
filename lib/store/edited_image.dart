@@ -28,7 +28,8 @@ abstract class _EditedImage with Store {
   ui.Rect crop;
 
   @observable
-  Filter filter = Sepia();
+  Filter filter = Pixelate();
+  // Filter filter = Sepia();
 
   @computed
   ObservableFuture<ui.Image> get uiImageFuture {
