@@ -84,7 +84,7 @@ class _PictureScannerState extends State<PictureScanner> {
           Expanded(
             child: Container(
               alignment: AlignmentDirectional.center,
-              child: CircleImages(),
+              child: MenuWidget(),
             ),
           ),
         ],
