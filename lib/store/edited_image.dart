@@ -78,11 +78,8 @@ abstract class _EditedImage with Store {
 
   @action
   loadFile(File file) async {
-<<<<<<< Updated upstream
     ogImage = file;
-=======
 
->>>>>>> Stashed changes
     baseImage = decodeImage(await file.readAsBytes());
     final smallerSide = math.min(baseImage.width, baseImage.height).toDouble();
     size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());

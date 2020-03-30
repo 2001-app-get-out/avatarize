@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import '../store/edited_image.dart';
-import '../store/face.dart';
 
 enum Detector { face }
 
 final image = GetIt.I<EditedImage>();
-final scannedFaces = GetIt.I<ScannedFace>();
+final ogFile = image.ogImage;
 
 class FaceDetectorSquare extends CustomPainter {
   FaceDetectorSquare(this.absoluteImageSize, this.faces);
@@ -28,10 +27,6 @@ class FaceDetectorSquare extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..color = Colors.red;
 
-    final PointMode pointMode = PointMode.points;
-    final FaceContourType contour = FaceContourType.face;
-
-
     for (Face face in faces) {
       canvas.drawRect(
         Rect.fromLTRB(
@@ -42,16 +37,6 @@ class FaceDetectorSquare extends CustomPainter {
         ),
         painter,
       );
-
-      List<Offset> pointList = face.getContour(contour).positionsList;
-
-      for (Offset off in pointList) {
-        print('OLD: ' + off.toString());
-        off.scale(scaleX, scaleY);
-        print('NEW: ' + off.toString());
-      }
-
-      canvas.drawPoints(pointMode, pointList, painter);
     }
   }
 
@@ -63,26 +48,41 @@ class FaceDetectorSquare extends CustomPainter {
 }
 
 class FaceDetectorContour extends CustomPainter {
-  final Size size = image.size;
-  final face = scannedFaces.selectedFace;
+  FaceDetectorContour(this.absoluteImageSize, this.faces);
+
+  final Size absoluteImageSize;
+  final List<Face> faces;
 
   @override
   void paint(Canvas canvas, Size size) {
+    final double scaleX = size.width / absoluteImageSize.width;
+    final double scaleY = size.height / absoluteImageSize.height;
     final Paint painter = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
-      ..strokeCap = StrokeCap.round
-      ..color = Colors.red;
+      ..strokeWidth = 20
+      ..style = PaintingStyle.fill
+      ..color = Colors.orange;
 
-    final PointMode pointMode = PointMode.points;
-    final FaceContourType contour = FaceContourType.allPoints;
+    final FaceContourType contour = FaceContourType.face;
 
-    List<Offset> pointList = face.getContour(contour).positionsList;
-    canvas.drawPoints(pointMode, pointList, painter);
+    for (Face face in faces) {
+      List<Offset> pointList = face.getContour(contour).positionsList;
+      int count = 0;
+      print(count.toString());
+      print('LENGTH: ' + pointList.length.toString());
+      for (Offset off in pointList) {
+        count++;
+        print(count.toString() + ': ' + off.toString());
+        off.scale(scaleX, scaleY);
+        canvas.drawCircle(off, 2, painter);
+      }
+      print('finished:' + count.toString());
+      // canvas.drawPoints(PointMode.points, pointList, painter);
+    }
   }
 
   @override
   bool shouldRepaint(FaceDetectorContour oldDelegate) {
-    return false;
+    return oldDelegate.absoluteImageSize != absoluteImageSize ||
+        oldDelegate.faces != faces;
   }
 }
