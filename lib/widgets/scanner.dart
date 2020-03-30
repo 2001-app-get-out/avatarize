@@ -8,24 +8,22 @@ import 'package:image_picker/image_picker.dart';
 
 import 'detector_painters.dart';
 
+// Main Scanner class
 class PictureScanner extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _PictureScannerState();
 }
 
+// Scanner class local state
 class _PictureScannerState extends State<PictureScanner> {
-  File _imageFile;
-  Size _imageSize;
+  File _imageFile; // The selected image
+  Size _imageSize; // The image size
   dynamic _scanResults;
-  Detector _currentDetector = Detector.face;
 
+  // The instance of the FaceDetector class
   final FaceDetector _faceDetector = FirebaseVision.instance.faceDetector(
-    FaceDetectorOptions(
-      enableContours: true,
-      enableLandmarks: true,
-      mode: FaceDetectorMode.fast),
+    FaceDetectorOptions(enableContours: true, mode: FaceDetectorMode.fast),
   );
-
 
   Future<void> _getAndScanImage() async {
     setState(() {
@@ -33,8 +31,7 @@ class _PictureScannerState extends State<PictureScanner> {
       _imageSize = null;
     });
 
-    final File imageFile =
-        await ImagePicker.pickImage(source: ImageSource.gallery);
+    final File imageFile = 
 
     if (imageFile != null) {
       _getImageSize(imageFile);
@@ -65,32 +62,25 @@ class _PictureScannerState extends State<PictureScanner> {
     });
   }
 
+
   Future<void> _scanImage(File imageFile) async {
     setState(() {
       _scanResults = null;
     });
 
+    // Converts image file into FireBaseVisionImage that ML Kit can read
     final FirebaseVisionImage visionImage =
         FirebaseVisionImage.fromFile(imageFile);
 
+    // Saves results of scan to variable and saves to local state
     dynamic results = await _faceDetector.processImage(visionImage);
-
     setState(() {
       _scanResults = results;
     });
-    
   }
 
   CustomPaint _buildResults(Size imageSize, dynamic results) {
-    CustomPainter painter;
-
-    switch (_currentDetector) {
-      case Detector.face:
-        painter = FaceDetectorPainter(_imageSize, results);
-        break;
-      default:
-        break;
-    }
+    CustomPainter painter = FaceDetectorPainter(_imageSize, results);
 
     return CustomPaint(
       painter: painter,
@@ -154,6 +144,7 @@ class _PictureScannerState extends State<PictureScanner> {
   @override
   void dispose() {
     _faceDetector.close();
+
     super.dispose();
   }
 }

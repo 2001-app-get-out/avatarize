@@ -22,7 +22,8 @@ class FaceDetectorPainter extends CustomPainter {
       ..color = Colors.red;
 
     final PointMode pointMode = PointMode.points;
-    final FaceContourType contour = FaceContourType.allPoints;
+    final FaceContourType contour = FaceContourType.face;
+
 
     for (Face face in faces) {
       canvas.drawRect(
@@ -34,16 +35,15 @@ class FaceDetectorPainter extends CustomPainter {
         ),
         painter,
       );
+
       List<Offset> pointList = face.getContour(contour).positionsList;
 
       for (Offset off in pointList) {
         print('OLD: ' + off.toString());
-        final newX = off.dx / scaleX;
-        final newY = off.dx / scaleY;
-
-        off = new Offset(newX, newY);
+        off.scale(scaleX, scaleY);
         print('NEW: ' + off.toString());
       }
+
       canvas.drawPoints(pointMode, pointList, painter);
     }
   }

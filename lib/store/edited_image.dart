@@ -16,6 +16,9 @@ class EditedImage = _EditedImage with _$EditedImage;
 
 abstract class _EditedImage with Store {
   @observable
+  File ogImage;
+
+  @observable
   Image baseImage;
 
   @observable
@@ -75,6 +78,7 @@ abstract class _EditedImage with Store {
 
   @action
   loadFile(File file) async {
+    ogImage = file;
     baseImage = decodeImage(await file.readAsBytes());
     final smallerSide = math.min(baseImage.width, baseImage.height).toDouble();
     size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());

@@ -190,13 +190,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.3"
-  firebase_ml_vision:
-    dependency: "direct main"
-    description:
-      name: firebase_ml_vision
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.3+8"
   file:
     dependency: "direct main"
     description:
@@ -204,6 +197,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
+  firebase_ml_vision:
+    dependency: "direct main"
+    description:
+      name: firebase_ml_vision
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.3+8"
   fixnum:
     dependency: transitive
     description:
