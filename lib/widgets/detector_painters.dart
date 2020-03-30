@@ -18,6 +18,9 @@ class FaceDetectorSquare extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    print(canvas.toString());
+    print(size.toString());
+
     final double scaleX = size.width / absoluteImageSize.width;
     final double scaleY = size.height / absoluteImageSize.height;
 
@@ -55,14 +58,17 @@ class FaceDetectorContour extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    print(canvas.toString());
+    print(size.toString());
     final double scaleX = size.width / absoluteImageSize.width;
     final double scaleY = size.height / absoluteImageSize.height;
-    final Paint painter = Paint()
-      ..strokeWidth = 20
-      ..style = PaintingStyle.fill
-      ..color = Colors.orange;
 
-    final FaceContourType contour = FaceContourType.face;
+    final Paint painter = Paint()
+      ..strokeWidth = 50
+      ..style = PaintingStyle.fill
+      ..color = Colors.red;
+
+    final FaceContourType contour = FaceContourType.allPoints;
 
     for (Face face in faces) {
       List<Offset> pointList = face.getContour(contour).positionsList;
@@ -71,12 +77,12 @@ class FaceDetectorContour extends CustomPainter {
       print('LENGTH: ' + pointList.length.toString());
       for (Offset off in pointList) {
         count++;
+        off = off.scale(scaleX, scaleY);
         print(count.toString() + ': ' + off.toString());
-        off.scale(scaleX, scaleY);
         canvas.drawCircle(off, 2, painter);
       }
       print('finished:' + count.toString());
-      // canvas.drawPoints(PointMode.points, pointList, painter);
+      canvas.drawPoints(PointMode.points, pointList, painter);
     }
   }
 
