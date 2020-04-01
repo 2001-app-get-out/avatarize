@@ -80,7 +80,15 @@ class _ImagePickerState extends State<ImagePickerClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Pick Image'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Platform.isAndroid

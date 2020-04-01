@@ -16,7 +16,13 @@ class EditedImage = _EditedImage with _$EditedImage;
 
 abstract class _EditedImage with Store {
   @observable
+  File ogFilepath;
+
+  @observable
   Image baseImage;
+
+  @observable
+  Image draftImage;
 
   @observable
   ui.Size size;
@@ -28,7 +34,7 @@ abstract class _EditedImage with Store {
   ui.Rect crop;
 
   @observable
-  Filter filter = Sepia();
+  Filter filter;
 
   @computed
   ObservableFuture<ui.Image> get uiImageFuture {
@@ -62,11 +68,14 @@ abstract class _EditedImage with Store {
 
   @computed
   Image get finalImage {
+    Image src;
     if (baseImage == null) {
       return null;
+    } else if (draftImage == null) {
+      src = baseImage.clone();
+    } else {
+      src = draftImage.clone();
     }
-
-    Image src = baseImage.clone();
     if (filter != null) {
       src = filter.apply(src);
     }
@@ -82,18 +91,11 @@ abstract class _EditedImage with Store {
   }
 
   @action
-  cropTo(ui.Rect rect) {
-    final overflow = 0.0;
-    final minSize = smallerSide / 16;
-    final left = math.max(
-        -overflow, math.min(rect.left, size.width - minSize + overflow));
-    final top = math.max(
-        -overflow, math.min(rect.top, size.height - minSize + overflow));
-    this.crop = ui.Rect.fromLTRB(
-      left,
-      top,
-      math.max(left + minSize, math.min(rect.right, size.height + overflow)),
-      math.max(top + minSize, math.min(rect.bottom, size.height + overflow)),
-    );
+  cropTo(File croppedFile) async {
+    if (croppedFile != null) {
+      Image croppedImage = decodeImage(await croppedFile.readAsBytes());
+      draftImage = croppedImage;
+      size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());
+    }
   }
 }

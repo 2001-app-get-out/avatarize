@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: '/',
       routes: {
-        '/': (context) => TestMenu(),
+        '/': (context) => ImagePickerClass(),
         '/image_picker': (context) => ImagePickerClass(),
         '/scroll_menu': (context) => MyHomePage(),
         '/image_editor': (context) => ImageEditorPage(),

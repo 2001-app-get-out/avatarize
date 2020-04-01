@@ -3,39 +3,36 @@ import 'package:test_flutter/store/filter.dart';
 import 'image_editor.dart';
 import '../store/edited_image.dart';
 import 'package:get_it/get_it.dart';
+import 'crop_test.dart';
 import 'save.dart';
 
 class MyHomePage extends StatelessWidget {
-  
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Homepage'),
-    ),
-    body: Center(
-      child: MenuWidget()
-    ),
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Homepage'),
+      ),
+      body: Center(child: MenuWidget()),
+    );
+  }
 }
 
 class MenuWidget extends StatefulWidget {
-   MenuWidget({Key key}) : super(key: key);
+  MenuWidget({Key key}) : super(key: key);
 
   @override
   _MenuWidgetState createState() => _MenuWidgetState();
-  }
+}
 
 class _MenuWidgetState extends State<MenuWidget> {
-
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     FilterSubMenuWidget(),
     Text(
-      'Crop',
+      'Choose your crop',
       style: optionStyle,
     ),
     Text(
@@ -45,6 +42,8 @@ class _MenuWidgetState extends State<MenuWidget> {
   ];
 
   void _onItemTapped(int index) {
+    if (index == 1) CropImage();
+    if (index == 3) savePng();
     setState(() {
       _selectedIndex = index;
     });
@@ -53,9 +52,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('BottomNavigationBar Sample'),
-      // ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -73,9 +69,15 @@ class _MenuWidgetState extends State<MenuWidget> {
             icon: Icon(Icons.star_half),
             title: Text('Decoration'),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.save),
+            title: Text('Save'),
+          ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue[800],
+        selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.deepPurple,
+        backgroundColor: Colors.grey,
         onTap: _onItemTapped,
       ),
     );
@@ -87,23 +89,19 @@ class FilterSubMenuWidget extends StatefulWidget {
 
   @override
   _FilterSubMenuWidgetState createState() => _FilterSubMenuWidgetState();
-  }
+}
 
 class _FilterSubMenuWidgetState extends State<FilterSubMenuWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.collections,
-                 color: Colors.grey),
-            title: Text('Grayscale')
-          ),
+              icon: Icon(Icons.collections, color: Colors.grey),
+              title: Text('Grayscale')),
           BottomNavigationBarItem(
-            icon: Icon(Icons.collections,
-             color: Colors.brown),
+            icon: Icon(Icons.collections, color: Colors.brown),
             title: Text('Sepia'),
           ),
         ],
