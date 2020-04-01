@@ -21,6 +21,9 @@ dependencies:
     sdk: flutter
 
   image_picker: ^0.6.3+4
+  firebase_ml_vision: ^0.9.3+8
+  logging: ^0.11.4
+  dart_dev: ^3.0.0
   image: ^2.1.4
   image_crop: ^0.3.2
   image_cropper: ^1.2.1

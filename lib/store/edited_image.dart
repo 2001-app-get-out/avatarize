@@ -27,14 +27,14 @@ abstract class _EditedImage with Store {
   @observable
   ui.Size size;
 
-  @computed
-  double get smallerSide => math.min(size.width, size.height);
-
   @observable
   ui.Rect crop;
 
   @observable
   Filter filter;
+
+  @computed
+  double get smallerSide => math.min(size.width, size.height);
 
   @computed
   ObservableFuture<ui.Image> get uiImageFuture {

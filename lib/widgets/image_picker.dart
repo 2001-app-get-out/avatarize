@@ -35,6 +35,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
         setState(() {
           _imageFile = pickedFile;
         });
+
         GetIt.I<EditedImage>().loadFile(pickedFile);
       } catch (e) {
         _pickImageError = e;
@@ -206,7 +207,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
                         ? int.parse(qualityController.text)
                         : null;
                     onPick(width, height, quality);
-                    Navigator.pushNamed(context, '/image_editor');
+                    Navigator.pushNamed(context, '/face_recognition');
                   }),
             ],
           );

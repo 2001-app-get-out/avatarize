@@ -15,21 +15,13 @@ void savePng() async {
   try {
     print('inside try');
     var now = new DateTime.now();
-
-
     final directory = await getApplicationDocumentsDirectory();
 
-    var png = encodePng(editedImage);
-
-    File save = new File('${directory.path}/$now.png');
+    File save = new File('${directory.path}/files/Pictures/$now.png');
 
     await save.create().then((File file) {
       file.writeAsBytesSync(encodePng(editedImage));
     });
-
-    File save2 = new File('${directory.path}/second_$now.png');
-    await save2.create();
-    save2.writeAsBytesSync(png);
     print('completed!');
   } catch (e) {
     print('Error saving image: $e');

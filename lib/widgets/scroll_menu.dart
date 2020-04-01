@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/store/filter.dart';
-import 'image_editor.dart';
 import '../store/edited_image.dart';
 import 'package:get_it/get_it.dart';
 import 'crop_test.dart';
