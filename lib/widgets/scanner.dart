@@ -1,14 +1,11 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 import 'dart:io';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image/image.dart' as img;
 import 'scroll_menu.dart';
 
 import 'detector_painters.dart';
-import 'image_editor.dart';
 import '../store/edited_image.dart';
 
 // Main Scanner class
@@ -36,7 +33,7 @@ class _PictureScannerState extends State<PictureScanner> {
       _imageSize = null;
     });
     final EditedImage imageStore = GetIt.I<EditedImage>();
-    final File imageFile = imageStore.ogImage;
+    File imageFile = imageStore.ogFilepath;
 
     if (imageFile != null) {
       _scanImage(imageFile);

@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:test_flutter/store/edited_image.dart';
 
-Future<Null> CropImage() async {
+Future<Null> cropImage() async {
   print("inside crop function");
   EditedImage editedImage = GetIt.I<EditedImage>();
   print('image filepath: ' + editedImage.ogFilepath.path);

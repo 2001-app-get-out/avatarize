@@ -8,7 +8,7 @@ import '../store/edited_image.dart';
 enum Detector { face }
 
 final image = GetIt.I<EditedImage>();
-final ogFile = image.ogImage;
+final ogFile = image.ogFilepath;
 
 class FaceDetectorSquare extends CustomPainter {
   FaceDetectorSquare(this.absoluteImageSize, this.faces);

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/store/filter.dart';
-import '../store/edited_image.dart';
-import 'package:get_it/get_it.dart';
-import 'crop_test.dart';
+import 'crop_image.dart';
 import 'save.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -41,7 +38,7 @@ class _MenuWidgetState extends State<MenuWidget> {
   ];
 
   void _onItemTapped(int index) {
-    if (index == 1) CropImage();
+    if (index == 1) cropImage();
     if (index == 3) savePng();
     setState(() {
       _selectedIndex = index;
