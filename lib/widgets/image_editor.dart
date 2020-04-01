@@ -41,18 +41,20 @@ class ImageEditor extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
+    print('Media queries' + width.toString() + ", " + height.toString());
     final image = GetIt.I<EditedImage>(); // Gets image from store
+    print('Image size: ' + image.size.toString());
     return Observer(
       builder: (context) {
         if (image.isRendered) {
           return Expanded(
+            //
             child: CustomPaint(
               painter: ImagePainter(
                 image: image.uiImage,
-                size: Size(height, width),
+                size: Size(width, width),
               ),
-              size: Size(height, width),
+              size: Size(width, width),
             ),
           );
         } else {
