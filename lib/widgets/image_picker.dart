@@ -206,7 +206,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
                         ? int.parse(qualityController.text)
                         : null;
                     onPick(width, height, quality);
-                    Navigator.pushNamed(context, '/face_recognition');
+                    Navigator.pushNamed(context, '/image_editor');
                   }),
             ],
           );
