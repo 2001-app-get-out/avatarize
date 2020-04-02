@@ -32,7 +32,7 @@ Future<Null> cropImage() async {
           ],
     androidUiSettings: AndroidUiSettings(
         toolbarTitle: 'Cropper',
-        toolbarColor: Colors.deepOrange,
+        toolbarColor: Colors.lightBlue,
         toolbarWidgetColor: Colors.white,
         initAspectRatio: CropAspectRatioPreset.original,
         lockAspectRatio: false),
