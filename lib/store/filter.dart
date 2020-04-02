@@ -16,6 +16,7 @@ class Sepia extends Filter {
   }
 }
 
+
 class Grayscale extends Filter {
   const Grayscale();
   Image apply(Image src) {
@@ -23,11 +24,20 @@ class Grayscale extends Filter {
   }
 }
 
+
+class Fill extends Filter {
+  final int color = 700;
+  const Fill();
+  Image apply(Image src) {
+    return fill(src, color);
+  }
+}
+
 class Pixelate extends Filter {
-  final int blockSize;
+  final int blockSize = 10;
   final PixelateMode mode;
 
-  const Pixelate({this.blockSize, this.mode = PixelateMode.upperLeft});
+  const Pixelate({this.mode = PixelateMode.upperLeft});
 
   Image apply(Image src) {
     return pixelate(src, blockSize, mode: mode);
