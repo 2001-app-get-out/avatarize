@@ -26,7 +26,7 @@ class ImageEditorPage extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 1,
-            child: ImageEditor(),
+            child: Column(children: [ImageEditor()]),
           ),
           Expanded(
             child: MenuWidget(),
@@ -47,15 +47,12 @@ class ImageEditor extends StatelessWidget {
     return Observer(
       builder: (context) {
         if (image.isRendered) {
-          return Expanded(
-            //
-            child: CustomPaint(
-              painter: ImagePainter(
-                  image: image.uiImage,
-                  screenSize: Size(width, height),
-                  avatar: image),
-              size: Size(width, width),
-            ),
+          return CustomPaint(
+            painter: ImagePainter(
+                image: image.uiImage,
+                screenSize: Size(width, height),
+                avatar: image),
+            size: Size(width, width),
           );
         } else {
           return Center(child: Text("loading"));
