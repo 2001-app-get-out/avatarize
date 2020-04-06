@@ -20,12 +20,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  image_picker: ^0.6.3+4
   logging: ^0.11.4
   dart_dev: ^3.0.0
+  image_picker: ^0.6.3+4
   image: ^2.1.4
-  # image_crop: ^0.3.2
   image_cropper: ^1.2.1
+  image_gallery_saver: ^1.2.2
 
   # Use mobx (and hangers on) for state management.
   mobx: ^1.1.0
@@ -35,7 +35,7 @@ dependencies:
   dart_json_mapper_mobx: ^1.2.0
   file: ^5.1.0
   path_provider: ^1.6.5
-  # flutter_simple_sticker_view: ^1.0.0
+  permission_handler: ^5.0.0+hotfix.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
