@@ -16,14 +16,12 @@ class Sepia extends Filter {
   }
 }
 
-
 class Grayscale extends Filter {
   const Grayscale();
   Image apply(Image src) {
     return grayscale(src);
   }
 }
-
 
 class Fill extends Filter {
   final int color = 700;
