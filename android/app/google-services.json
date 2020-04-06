@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "160630081537",
+    "firebase_url": "https://avatarize-2001.firebaseio.com",
+    "project_id": "avatarize-2001",
+    "storage_bucket": "avatarize-2001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160630081537:android:b5eb2e20ac6bcfc6ca5800",
+        "android_client_info": {
+          "package_name": "com.example.test_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160630081537-533qqpq2gilu0idarbobhm6lv6n9setc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4sy4KvYyL6DkRcR48fz1Uztj580fxnT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160630081537-533qqpq2gilu0idarbobhm6lv6n9setc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

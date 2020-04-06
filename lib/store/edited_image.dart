@@ -16,20 +16,27 @@ class EditedImage = _EditedImage with _$EditedImage;
 
 abstract class _EditedImage with Store {
   @observable
+  File ogImage;
+
+  @observable
   Image baseImage;
 
   @observable
   ui.Size size;
 
-  @computed
-  double get smallerSide => math.min(size.width, size.height);
-
   @observable
   ui.Rect crop;
 
   @observable
+<<<<<<< HEAD
   Filter filter = Pixelate();
   // Filter filter = Sepia();
+=======
+  Filter filter;
+
+  @computed
+  double get smallerSide => math.min(size.width, size.height);
+>>>>>>> 77132583ab0a8a82bbf94018ea213859773c6cc3
 
   @computed
   ObservableFuture<ui.Image> get uiImageFuture {
@@ -76,6 +83,8 @@ abstract class _EditedImage with Store {
 
   @action
   loadFile(File file) async {
+    ogImage = file;
+
     baseImage = decodeImage(await file.readAsBytes());
     final smallerSide = math.min(baseImage.width, baseImage.height).toDouble();
     size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());

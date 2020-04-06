@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/store/filter.dart';
-import 'image_editor.dart';
 import '../store/edited_image.dart';
 import 'package:get_it/get_it.dart';
 import 'save.dart';
 import '../store/filter.dart';
 
 class MyHomePage extends StatelessWidget {
-  
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Homepage'),
-    ),
-    body: Center(
-      child: MenuWidget()
-    ),
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Homepage'),
+      ),
+      body: Center(child: MenuWidget()),
+    );
+  }
 }
 
 class MenuWidget extends StatefulWidget {
-   MenuWidget({Key key}) : super(key: key);
+  MenuWidget({Key key}) : super(key: key);
 
   @override
   _MenuWidgetState createState() => _MenuWidgetState();
-  }
+}
 
 class _MenuWidgetState extends State<MenuWidget> {
-
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
