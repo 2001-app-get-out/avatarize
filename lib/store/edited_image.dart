@@ -94,6 +94,7 @@ abstract class _EditedImage with Store {
     size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());
     crop = ui.Rect.fromLTWH(0, 0, smallerSide, smallerSide);
     draftImage = null;
+    filter = null;
   }
 
   @action
