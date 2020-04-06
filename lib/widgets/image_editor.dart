@@ -70,9 +70,9 @@ class ImagePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    print(image.toString());
-    print(screenSize.toString());
-    print(avatar.size.toString());
+    // print(image.toString());
+    // print(screenSize.toString());
+    // print(avatar.size.toString());
     canvas.drawImageRect(
         image,
         Rect.fromLTWH(0, 0, avatar.size.width, avatar.size.width),

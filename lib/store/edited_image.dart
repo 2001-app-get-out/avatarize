@@ -110,4 +110,13 @@ abstract class _EditedImage with Store {
       crop = ui.Rect.fromLTWH(0, 0, smallerSide, smallerSide);
     }
   }
+
+  @action
+  applyStickers(Image snapshot) {
+    draftImage = snapshot;
+    double w = snapshot.width.toDouble();
+    double h = snapshot.height.toDouble();
+    size = ui.Size(w, h);
+    crop = ui.Rect.fromLTWH(0, 0, w, h);
+  }
 }

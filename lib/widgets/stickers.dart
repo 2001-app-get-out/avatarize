@@ -52,13 +52,13 @@ class _StickerViewState extends State<StickerView> {
         Image.asset("graphics/anime_parts_033_o.png"),
         Image.asset("graphics/anime_parts_036_o.png"),
         Image.asset("graphics/anime_parts_037_o.png"),
-        
       ],
       panelHeight: 150,
       panelBackgroundColor: Colors.blue,
       panelStickerBackgroundColor: Colors.pink,
       panelStickercrossAxisCount: 4,
       panelStickerAspectRatio: 1.0,
+      devicePixelRatio: 3.0,
     );
 
     return Scaffold(
@@ -71,7 +71,8 @@ class _StickerViewState extends State<StickerView> {
                 Uint8List image = await _stickerView.exportImage();
                 var newImage = img.decodeImage(image);
                 print(newImage.toString());
-                imageStore.draftImage = img.decodeImage(image);
+                imageStore.applyStickers(img.decodeImage(image));
+                // Navigator.pop(context); // do we want this?
               }),
         ],
       ),

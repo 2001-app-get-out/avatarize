@@ -139,9 +139,11 @@ class _FlutterSimpleStickerViewState extends State<FlutterSimpleStickerView> {
 
   Future<Uint8List> exportImage() async {
     RenderRepaintBoundary boundary = key.currentContext.findRenderObject();
-    var image =
-        await boundary.toImage(pixelRatio: 1);
-        
+    print('pixel ratio: ' + widget.devicePixelRatio.toString());
+    print('boundary size: ' + boundary.size.toString());
+    var image = await boundary.toImage(pixelRatio: widget.devicePixelRatio);
+    print('image size: ${image.width} x ${image.height}');
+
     var byteData = await image.toByteData(format: ImageByteFormat.png);
     var pngBytes = byteData.buffer.asUint8List();
 
