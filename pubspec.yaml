@@ -25,6 +25,8 @@ dependencies:
   logging: ^0.11.4
   dart_dev: ^3.0.0
   image: ^2.1.4
+  image_crop: ^0.3.2
+  image_cropper: ^1.2.1
 
   # Use mobx (and hangers on) for state management.
   mobx: ^1.1.0

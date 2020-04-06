@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'scroll_menu.dart';
 import 'package:test_flutter/store/edited_image.dart';
 
 class ImagePickerClass extends StatefulWidget {
@@ -81,7 +80,15 @@ class _ImagePickerState extends State<ImagePickerClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Pick Image'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Platform.isAndroid
@@ -199,7 +206,7 @@ class _ImagePickerState extends State<ImagePickerClass> {
                         ? int.parse(qualityController.text)
                         : null;
                     onPick(width, height, quality);
-                    Navigator.pushNamed(context, '/face_recognition');
+                    Navigator.pushNamed(context, '/image_editor');
                   }),
             ],
           );

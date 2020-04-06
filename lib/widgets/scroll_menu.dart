@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/store/filter.dart';
-import '../store/edited_image.dart';
-import 'package:get_it/get_it.dart';
+import 'crop_image.dart';
 import 'save.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -30,7 +28,7 @@ class _MenuWidgetState extends State<MenuWidget> {
   static List<Widget> _widgetOptions = <Widget>[
     FilterSubMenuWidget(),
     Text(
-      'Crop',
+      'Choose your crop',
       style: optionStyle,
     ),
     Text(
@@ -40,6 +38,8 @@ class _MenuWidgetState extends State<MenuWidget> {
   ];
 
   void _onItemTapped(int index) {
+    if (index == 1) cropImage();
+    if (index == 3) savePng();
     setState(() {
       _selectedIndex = index;
     });
@@ -48,9 +48,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('BottomNavigationBar Sample'),
-      // ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -68,9 +65,15 @@ class _MenuWidgetState extends State<MenuWidget> {
             icon: Icon(Icons.star_half),
             title: Text('Decoration'),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.save),
+            title: Text('Save'),
+          ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue[800],
+        selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.deepPurple,
+        backgroundColor: Colors.grey,
         onTap: _onItemTapped,
       ),
     );
@@ -91,16 +94,10 @@ class _FilterSubMenuWidgetState extends State<FilterSubMenuWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.collections,
-                color: Colors.grey,
-              ),
+              icon: Icon(Icons.collections, color: Colors.grey),
               title: Text('Grayscale')),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.collections,
-              color: Colors.brown,
-            ),
+            icon: Icon(Icons.collections, color: Colors.brown),
             title: Text('Sepia'),
           ),
         ],
