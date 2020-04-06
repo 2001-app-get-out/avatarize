@@ -5,19 +5,6 @@ import 'package:test_flutter/store/edited_image.dart';
 import 'crop_image.dart';
 import 'save.dart';
 import '../store/filter.dart';
-// import './stickers.dart';
-
-// class MyHomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Homepage'),
-//       ),
-//       body: Center(child: MenuWidget()),
-//     );
-//   }
-// }
 
 class MenuWidget extends StatefulWidget {
   MenuWidget({Key key}) : super(key: key);
@@ -38,6 +25,10 @@ class _MenuWidgetState extends State<MenuWidget> {
     ),
     Text(
       "You should be decorating!",
+      style: optionStyle,
+    ),
+    Text(
+      'Saved!',
       style: optionStyle,
     )
     // Stickers(),
@@ -115,12 +106,6 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('BottomNavigationBar Sample'),
-      // ),
-      // body: Center(
-      //   child: _widgetOptions.elementAt(_selectedIndex),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -147,55 +132,3 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
     );
   }
 }
-
-// class FilterSubMenuWidget extends StatefulWidget {
-//   FilterSubMenuWidget({Key key}) : super(key: key);
-
-//   @override
-//   _FilterSubMenuWidgetState createState() => _FilterSubMenuWidgetState();
-//   }
-
-// class _FilterSubMenuWidgetState extends State<FilterSubMenuWidget> {
-
-//   int _selectedIndex = 0;
-//   static const TextStyle optionStyle =
-//       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-//   static List<Widget> _widgetOptions = <Widget>[
-//     FilterSubMenuWidget(),
-//     Text(
-//       'Crop',
-//       style: optionStyle,
-//     ),
-//     Text(
-//       'Stickers coming soon',
-//       style: optionStyle,
-//     ),
-//   ];
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       bottomNavigationBar: BottomNavigationBar(
-//         items: const <BottomNavigationBarItem>[
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.collections,
-//                  color: Colors.grey),
-//             title: Text('Grayscale')
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.collections,
-//              color: Colors.brown),
-//             title: Text('Sepia'),
-//           ),
-//         ],
-//         selectedItemColor: Colors.blue[800],
-//       ),
-//     );
-//   }
-// }
