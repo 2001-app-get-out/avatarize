@@ -5,18 +5,19 @@ import 'package:test_flutter/store/edited_image.dart';
 import 'crop_image.dart';
 import 'save.dart';
 import '../store/filter.dart';
+// import './stickers.dart';
 
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Homepage'),
-      ),
-      body: Center(child: MenuWidget()),
-    );
-  }
-}
+// class MyHomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Homepage'),
+//       ),
+//       body: Center(child: MenuWidget()),
+//     );
+//   }
+// }
 
 class MenuWidget extends StatefulWidget {
   MenuWidget({Key key}) : super(key: key);
@@ -36,13 +37,15 @@ class _MenuWidgetState extends State<MenuWidget> {
       style: optionStyle,
     ),
     Text(
-      'Stickers coming soon',
+      "You should be decorating!",
       style: optionStyle,
-    ),
+    )
+    // Stickers(),
   ];
 
   void _onItemTapped(int index) {
     if (index == 1) cropImage();
+    if (index == 2) Navigator.pushNamed(context, '/stickers');
     if (index == 3) savePng();
     setState(() {
       _selectedIndex = index;

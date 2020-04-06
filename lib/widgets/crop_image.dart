@@ -15,27 +15,17 @@ Future<Null> cropImage() async {
     aspectRatioPresets: Platform.isAndroid
         ? [
             CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio3x2,
-            CropAspectRatioPreset.original,
-            CropAspectRatioPreset.ratio4x3,
-            CropAspectRatioPreset.ratio16x9
           ]
         : [
             CropAspectRatioPreset.original,
             CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio3x2,
-            CropAspectRatioPreset.ratio4x3,
-            CropAspectRatioPreset.ratio5x3,
-            CropAspectRatioPreset.ratio5x4,
-            CropAspectRatioPreset.ratio7x5,
-            CropAspectRatioPreset.ratio16x9
           ],
     androidUiSettings: AndroidUiSettings(
         toolbarTitle: 'Cropper',
         toolbarColor: Colors.lightBlue,
         toolbarWidgetColor: Colors.white,
         initAspectRatio: CropAspectRatioPreset.original,
-        lockAspectRatio: false),
+        lockAspectRatio: true),
     iosUiSettings: IOSUiSettings(
       title: 'Cropper',
     ),

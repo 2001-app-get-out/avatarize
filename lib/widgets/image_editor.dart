@@ -1,5 +1,5 @@
 import 'dart:ui' as ui;
-// import 'dart:developer' as developer;
+import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -51,9 +51,9 @@ class ImageEditor extends StatelessWidget {
             //
             child: CustomPaint(
               painter: ImagePainter(
-                image: image.uiImage,
-                size: Size(width, width),
-              ),
+                  image: image.uiImage,
+                  screenSize: Size(width, height),
+                  avatar: image),
               size: Size(width, width),
             ),
           );
@@ -67,12 +67,20 @@ class ImageEditor extends StatelessWidget {
 
 class ImagePainter extends CustomPainter {
   ui.Image image;
-  ui.Size size;
-  ImagePainter({@required this.image, this.size});
+  ui.Size screenSize; //size of the screen
+  EditedImage avatar;
+  ImagePainter({@required this.image, this.screenSize, this.avatar});
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawImage(image, Offset(0.0, 0.0), Paint());
+    print(image.toString());
+    print(screenSize.toString());
+    print(avatar.size.toString());
+    canvas.drawImageRect(
+        image,
+        Rect.fromLTWH(0, 0, avatar.size.width, avatar.size.width),
+        Rect.fromLTWH(0, 0, size.width.toDouble(), size.width.toDouble()),
+        Paint());
   }
 
   @override
