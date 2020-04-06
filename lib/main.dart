@@ -5,8 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'store/edited_image.dart';
 import 'widgets/scroll_menu.dart';
 import 'widgets/image_picker.dart';
-import 'widgets/scanner.dart';
 import 'widgets/image_editor.dart';
+import 'widgets/stickers.dart';
 
 void main() {
   GetIt.I.registerSingleton<EditedImage>(EditedImage());
@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => ImagePickerClass(),
         '/image_picker': (context) => ImagePickerClass(),
-        '/face_recognition': (context) => PictureScanner(),
         '/image_editor': (context) => ImageEditorPage(),
+        '/stickers': (context) => Stickers(),
 
       },
       theme: new ThemeData(

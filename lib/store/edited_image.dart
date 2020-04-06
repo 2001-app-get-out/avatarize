@@ -84,25 +84,39 @@ abstract class _EditedImage with Store {
 
   @action
   loadFile(File file) async {
+    print('inside load file function');
+    print('filepath: ' + file.toString());
     // double myWidth = MediaQuery.of(context).size.width;
-    int myWidth = 350;
+    // int myWidth = 350;
     ogFilepath = file;
     baseImage = decodeImage(await file.readAsBytes());
-    baseImage = copyResize(baseImage, width: myWidth);
     final smallerSide = math.min(baseImage.width, baseImage.height).toDouble();
     size = ui.Size(baseImage.width.toDouble(), baseImage.height.toDouble());
     crop = ui.Rect.fromLTWH(0, 0, smallerSide, smallerSide);
+    draftImage = null;
   }
 
   @action
   cropTo(File croppedFile) async {
-    int myWidth = 350;
     print('Inside cropTo function');
     if (croppedFile != null) {
       Image croppedImage = decodeImage(await croppedFile.readAsBytes());
-      draftImage = copyResize(croppedImage, width: myWidth);
+      draftImage = croppedImage;
       size = ui.Size(
           croppedImage.width.toDouble(), croppedImage.height.toDouble());
+      final smallerSide =
+          math.min(croppedImage.width, croppedImage.height).toDouble();
+
+      crop = ui.Rect.fromLTWH(0, 0, smallerSide, smallerSide);
     }
+  }
+
+  @action
+  applyStickers(Image snapshot) {
+    draftImage = snapshot;
+    double w = snapshot.width.toDouble();
+    double h = snapshot.height.toDouble();
+    size = ui.Size(w, h);
+    crop = ui.Rect.fromLTWH(0, 0, w, h);
   }
 }
