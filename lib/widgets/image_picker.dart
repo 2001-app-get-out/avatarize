@@ -18,28 +18,25 @@ class _ImagePickerState extends State<ImagePickerClass> {
   dynamic _pickImageError;
   String _retrieveDataError;
 
-  final TextEditingController maxWidthController = TextEditingController();
-  final TextEditingController maxHeightController = TextEditingController();
-  final TextEditingController qualityController = TextEditingController();
+  // final TextEditingController maxWidthController = TextEditingController();
+  // final TextEditingController maxHeightController = TextEditingController();
+  // final TextEditingController qualityController = TextEditingController();
 
   void _onImageButtonPressed(ImageSource source, {BuildContext context}) async {
-    await _displayPickImageDialog(context,
-        (double maxWidth, double maxHeight, int quality) async {
-      try {
-        var pickedFile = await ImagePicker.pickImage(
-            source: source,
-            maxWidth: maxWidth,
-            maxHeight: maxHeight,
-            imageQuality: quality);
+    try {
+      var pickedFile = await ImagePicker.pickImage(source: source);
+
+      if (pickedFile != null) {
         setState(() {
           _imageFile = pickedFile;
         });
 
         GetIt.I<EditedImage>().loadFile(pickedFile);
-      } catch (e) {
-        _pickImageError = e;
+        Navigator.pushNamed(context, '/image_editor');
       }
-    });
+    } catch (e) {
+      _pickImageError = e;
+    }
   }
 
   dynamic _previewImage() {
@@ -155,62 +152,6 @@ class _ImagePickerState extends State<ImagePickerClass> {
       return result;
     }
     return null;
-  }
-
-  Future<void> _displayPickImageDialog(
-      BuildContext context, OnPickImageCallback onPick) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Add optional parameters'),
-            content: Column(
-              children: <Widget>[
-                TextField(
-                  controller: maxWidthController,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  decoration:
-                      InputDecoration(hintText: "Enter maxWidth if desired"),
-                ),
-                TextField(
-                  controller: maxHeightController,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  decoration:
-                      InputDecoration(hintText: "Enter maxHeight if desired"),
-                ),
-                TextField(
-                  controller: qualityController,
-                  keyboardType: TextInputType.number,
-                  decoration:
-                      InputDecoration(hintText: "Enter quality if desired"),
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: const Text('CANCEL'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(
-                  child: const Text('PICK'),
-                  onPressed: () {
-                    double width = maxWidthController.text.isNotEmpty
-                        ? double.parse(maxWidthController.text)
-                        : null;
-                    double height = maxHeightController.text.isNotEmpty
-                        ? double.parse(maxHeightController.text)
-                        : null;
-                    int quality = qualityController.text.isNotEmpty
-                        ? int.parse(qualityController.text)
-                        : null;
-                    onPick(width, height, quality);
-                    Navigator.pushNamed(context, '/image_editor');
-                  }),
-            ],
-          );
-        });
   }
 }
 
