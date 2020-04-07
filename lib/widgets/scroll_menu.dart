@@ -80,7 +80,7 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
     Grayscale(),
     Sepia(),
     Pixelate(),
-    Fill(),
+    null,
   ];
 
   void _onItemTapped(int index) {
@@ -95,8 +95,7 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.collections),
             title: Text('Grayscale'),
@@ -106,12 +105,12 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
             title: Text('Sepia'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.collections),
+            icon: Icon(Icons.blur_on, color: Colors.black),
             title: Text('Pixelate'),
           ),
-             BottomNavigationBarItem(
-            icon: Icon(Icons.collections),
-            title: Text('coming soon'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.not_interested, color: Colors.red.shade900),
+            title: Text('None'),
           ),
         ],
         currentIndex: _selectedIndex,
