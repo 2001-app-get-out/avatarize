@@ -5,19 +5,6 @@ import 'package:test_flutter/store/edited_image.dart';
 import 'crop_image.dart';
 import 'save.dart';
 import '../store/filter.dart';
-// import './stickers.dart';
-
-// class MyHomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Homepage'),
-//       ),
-//       body: Center(child: MenuWidget()),
-//     );
-//   }
-// }
 
 class MenuWidget extends StatefulWidget {
   MenuWidget({Key key}) : super(key: key);
@@ -28,40 +15,9 @@ class MenuWidget extends StatefulWidget {
 
 class _MenuWidgetState extends State<MenuWidget> {
 
-  // int _selectedIndex = 0;
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // static List _filterOptions = [
-  //   SubMenuWidget(),
-  //   cropImage(),
-  //   // Navigator.pushNamed(context, '/stickers');
-  //   // savePng()
-  // ];
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  //   // _selectedIndex = index;
-  //   // image.filter = _filterOptions.elementAt(_selectedIndex);
-  // }
-
-//ORIGINAL 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // static List<Widget> _widgetOptions = <Widget>[
-  //   SubMenuWidget(),
-  //   Text(
-  //     'Choose your crop',
-  //     style: optionStyle,
-  //   ),
-  //   Text(
-  //     "You should be decorating!",
-  //     style: optionStyle,
-  //   )
-  //   // Stickers(),
-  // ];
 
   void _onItemTapped(int index) {
     if (index == 0) SubMenuWidget();
@@ -77,9 +33,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center (child: SubMenuWidget()),
-      // body: Center(
-      //   child: _widgetOptions.elementAt(_selectedIndex),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -141,12 +94,6 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('BottomNavigationBar Sample'),
-      // ),
-      // body: Center(
-      //   child: _widgetOptions.elementAt(_selectedIndex),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -171,61 +118,8 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
         selectedItemColor: Colors.blueAccent,
         unselectedItemColor: Colors.deepPurple,
         backgroundColor: Colors.white,
-        // selectedItemColor: Colors.blue[800],
         onTap: _onItemTapped,
       ),
     );
   }
 }
-
-// class FilterSubMenuWidget extends StatefulWidget {
-//   FilterSubMenuWidget({Key key}) : super(key: key);
-
-//   @override
-//   _FilterSubMenuWidgetState createState() => _FilterSubMenuWidgetState();
-//   }
-
-// class _FilterSubMenuWidgetState extends State<FilterSubMenuWidget> {
-
-//   int _selectedIndex = 0;
-//   static const TextStyle optionStyle =
-//       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-//   static List<Widget> _widgetOptions = <Widget>[
-//     FilterSubMenuWidget(),
-//     Text(
-//       'Crop',
-//       style: optionStyle,
-//     ),
-//     Text(
-//       'Stickers coming soon',
-//       style: optionStyle,
-//     ),
-//   ];
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       bottomNavigationBar: BottomNavigationBar(
-//         items: const <BottomNavigationBarItem>[
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.collections,
-//                  color: Colors.grey),
-//             title: Text('Grayscale')
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.collections,
-//              color: Colors.brown),
-//             title: Text('Sepia'),
-//           ),
-//         ],
-//         selectedItemColor: Colors.blue[800],
-//       ),
-//     );
-//   }
-// }
